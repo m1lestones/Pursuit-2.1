@@ -23,3 +23,14 @@ A replica of the Pursuit student dashboard (weekly curriculum view) with PRD-dri
 ## Test mode (fast reminders/timers)
 - Open `http://localhost:8000/?test=1` to enable a visible “Test mode ON” badge.
 - In test mode: missed-assignment reminders run every ~10s and lunch timers default to ~20s.
+
+## Contributing / workflow
+- Create a branch: `git checkout -b your-name/feature`
+- Make changes + commit: `git add .` then `git commit -m "Describe change"`
+- Push your branch: `git push -u origin your-name/feature`
+- Open a Pull Request on GitHub into `main`
+- Merge the PR when checks look good and there are no conflicts
+
+### Staying up to date
+- `git checkout main`
+- `git pull origin main`
