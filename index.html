@@ -87,7 +87,12 @@
                 <article class="day-card" data-day="2026-01-31" role="listitem" aria-label="Saturday">
                     <div class="day-head">
                         <div class="day-date">1.31 SAT</div>
-                        <div class="day-chip" aria-hidden="true">›</div>
+                        <div class="day-head-actions">
+                            <button class="expand-btn" type="button" data-expand-day aria-label="Expand day" aria-expanded="false">
+                                <span aria-hidden="true">⤢</span>
+                            </button>
+                            <div class="day-chip" aria-hidden="true">›</div>
+                        </div>
                     </div>
 
                     <div class="day-section-title">Activities</div>
@@ -190,7 +195,12 @@
                 <article class="day-card" data-day="2026-02-01" role="listitem" aria-label="Sunday">
                     <div class="day-head">
                         <div class="day-date">2.1 SUN</div>
-                        <div class="day-chip" aria-hidden="true">›</div>
+                        <div class="day-head-actions">
+                            <button class="expand-btn" type="button" data-expand-day aria-label="Expand day" aria-expanded="false">
+                                <span aria-hidden="true">⤢</span>
+                            </button>
+                            <div class="day-chip" aria-hidden="true">›</div>
+                        </div>
                     </div>
 
                     <div class="day-section-title">Activities</div>
@@ -296,7 +306,12 @@
                 <article class="day-card day-card--today" data-day="2026-02-02" role="listitem" aria-label="Monday" data-selected="true">
                     <div class="day-head">
                         <div class="day-date"><span class="today-label">TODAY</span> 2.2 MON</div>
-                        <div class="day-chip" aria-hidden="true">›</div>
+                        <div class="day-head-actions">
+                            <button class="expand-btn" type="button" data-expand-day aria-label="Expand day" aria-expanded="false">
+                                <span aria-hidden="true">⤢</span>
+                            </button>
+                            <div class="day-chip" aria-hidden="true">›</div>
+                        </div>
                     </div>
 
                     <div class="today-focus" aria-label="Today focus">
@@ -438,7 +453,12 @@
                 <article class="day-card" data-day="2026-02-03" role="listitem" aria-label="Tuesday">
                     <div class="day-head">
                         <div class="day-date">2.3 TUE</div>
-                        <div class="day-chip" aria-hidden="true">›</div>
+                        <div class="day-head-actions">
+                            <button class="expand-btn" type="button" data-expand-day aria-label="Expand day" aria-expanded="false">
+                                <span aria-hidden="true">⤢</span>
+                            </button>
+                            <div class="day-chip" aria-hidden="true">›</div>
+                        </div>
                     </div>
 
                     <div class="day-section-title">Activities</div>
@@ -540,7 +560,12 @@
                 <article class="day-card" data-day="2026-02-04" role="listitem" aria-label="Wednesday">
                     <div class="day-head">
                         <div class="day-date">2.4 WED</div>
-                        <div class="day-chip" aria-hidden="true">›</div>
+                        <div class="day-head-actions">
+                            <button class="expand-btn" type="button" data-expand-day aria-label="Expand day" aria-expanded="false">
+                                <span aria-hidden="true">⤢</span>
+                            </button>
+                            <div class="day-chip" aria-hidden="true">›</div>
+                        </div>
                     </div>
 
                     <div class="day-section-title">Activities</div>
@@ -1129,6 +1154,56 @@
             });
         }
 
+        function bindDayExpansion() {
+            const grid = document.querySelector('.dashboard-grid');
+            if (!grid) return;
+
+            function collapseAll() {
+                grid.classList.remove('dashboard-grid--expanded');
+                const cards = Array.from(grid.querySelectorAll('.day-card'));
+                for (const card of cards) {
+                    card.classList.remove('day-card--expanded', 'day-card--minimized');
+                    const toggle = card.querySelector('[data-expand-day]');
+                    if (toggle) toggle.setAttribute('aria-expanded', 'false');
+                }
+            }
+
+            grid.addEventListener('click', (e) => {
+                const btn = e.target.closest('[data-expand-day]');
+                if (!btn) return;
+                const card = btn.closest('.day-card');
+                if (!card) return;
+
+                const isExpanded = card.classList.contains('day-card--expanded');
+                if (grid.classList.contains('dashboard-grid--expanded') && isExpanded) {
+                    collapseAll();
+                    return;
+                }
+
+                grid.classList.add('dashboard-grid--expanded');
+                const cards = Array.from(grid.querySelectorAll('.day-card'));
+                for (const c of cards) {
+                    const toggle = c.querySelector('[data-expand-day]');
+                    if (c === card) {
+                        c.classList.add('day-card--expanded');
+                        c.classList.remove('day-card--minimized');
+                        if (toggle) toggle.setAttribute('aria-expanded', 'true');
+                    } else {
+                        c.classList.add('day-card--minimized');
+                        c.classList.remove('day-card--expanded');
+                        if (toggle) toggle.setAttribute('aria-expanded', 'false');
+                    }
+                }
+            });
+
+            // Optional: ESC collapses
+            document.addEventListener('keydown', (e) => {
+                if (e.key !== 'Escape') return;
+                if (!grid.classList.contains('dashboard-grid--expanded')) return;
+                collapseAll();
+            });
+        }
+
         function bindProgressUpdates() {
             document.addEventListener('change', (e) => {
                 const check = e.target.closest('.task-check');
@@ -1149,6 +1224,7 @@
             bindTaskToggles();
             bindProgressUpdates();
             bindNextBestAction();
+            bindDayExpansion();
             const dayCards = Array.from(document.querySelectorAll('.day-card'));
             for (const card of dayCards) updateDayProgress(card);
             updateWeekProgress();

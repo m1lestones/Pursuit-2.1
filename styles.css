@@ -368,6 +368,78 @@ body {
     margin-bottom: 10px;
 }
 
+.day-head-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.expand-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 10px;
+    border: 1px solid rgba(63, 68, 245, 0.55);
+    background: rgba(255, 255, 255, 0.65);
+    color: var(--primary-ink);
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    font-weight: 900;
+    transition: transform 0.12s ease, filter 0.12s ease;
+}
+
+.expand-btn:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.03);
+}
+
+.day-card--today .expand-btn {
+    border-color: rgba(255, 255, 255, 0.55);
+    background: rgba(255, 255, 255, 0.14);
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.dashboard-grid--expanded {
+    grid-template-columns: 92px 1fr;
+    align-items: start;
+}
+
+.dashboard-grid--expanded .day-card {
+    min-height: 64px;
+}
+
+.day-card--expanded {
+    grid-column: 2;
+    min-height: 620px;
+    padding: 18px 18px 14px;
+}
+
+.day-card--minimized {
+    grid-column: 1;
+    padding: 10px;
+    opacity: 0.78;
+    box-shadow: none;
+}
+
+.day-card--minimized .today-focus,
+.day-card--minimized .day-section-title,
+.day-card--minimized .task-list,
+.day-card--minimized .day-footer {
+    display: none;
+}
+
+.day-card--minimized .day-head {
+    margin-bottom: 0;
+}
+
+.day-card--minimized .day-date {
+    font-size: 11px;
+}
+
+.day-card--minimized .day-chip {
+    display: none;
+}
+
 .day-date {
     font-weight: 900;
     letter-spacing: -0.02em;
@@ -471,7 +543,6 @@ body {
     flex: 1;
 }
 
-<<<<<<< HEAD
 .task-check {
     margin-top: 2px;
     width: 16px;
