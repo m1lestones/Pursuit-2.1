@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pursuit Dashboard • Performance</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="loader.js" defer></script>
+</head>
+
+<body class="simple-view">
+    <nav class="sidebar" aria-label="Primary">
+        <div class="sidebar-top">
+            <a class="sidebar-brand" href="index.html" aria-label="Dashboard">
+                <div class="logo" aria-label="Pursuit">
+                    <svg class="pursuit-mark" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                        <path d="M26 54V16" stroke="currentColor" stroke-width="6" stroke-linecap="round" />
+                        <path d="M26 30C26 23 31 18 38 18C45 18 50 23 50 30C50 37 45 42 38 42C31 42 26 37 26 30" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M22 18C24 10 32 7 39 9C44 10 47 13 50 16" stroke="currentColor" stroke-width="6" stroke-linecap="round" />
+                        <path d="M50 16L56 8" stroke="currentColor" stroke-width="6" stroke-linecap="round" />
+                        <path d="M56 8V20" stroke="currentColor" stroke-width="6" stroke-linecap="round" />
+                        <path d="M56 8H44" stroke="currentColor" stroke-width="6" stroke-linecap="round" />
+                    </svg>
+                </div>
+            </a>
+        </div>
+
+        <div class="nav-icons" aria-label="Navigation">
+            <a class="icon-btn" href="index.html" aria-label="Dashboard">
+                <span class="nav-item-icon" aria-hidden="true">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path d="M4 10.5L12 4l8 6.5V20a1.5 1.5 0 0 1-1.5 1.5H5.5A1.5 1.5 0 0 1 4 20v-9.5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+                        <path d="M9.5 21.5v-7h5v7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </span>
+                <span class="nav-label" aria-hidden="true">Dashboard</span>
+            </a>
+
+            <a class="icon-btn" href="day.html" aria-label="Learning">
+                <span class="nav-item-icon" aria-hidden="true">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path d="M4 6.5c0-1.4 1.1-2.5 2.5-2.5H20v16H6.5C5.1 20 4 18.9 4 17.5V6.5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+                        <path d="M8 7.5h8M8 11h8M8 14.5h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                        <path d="M6.5 4C5.1 4 4 5.1 4 6.5S5.1 9 6.5 9H20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+                    </svg>
+                </span>
+                <span class="nav-label" aria-hidden="true">Learning</span>
+            </a>
+
+            <a class="icon-btn" href="aichat.html" aria-label="AI Chat">
+                <span class="nav-item-icon" aria-hidden="true">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path d="M5 6.8C5 5.25 6.25 4 7.8 4h8.4C17.75 4 19 5.25 19 6.8v6.4c0 1.55-1.25 2.8-2.8 2.8H10l-4.1 3.1c-.5.38-1.2.02-1.2-.6V16c-.46-.5-.7-1.13-.7-1.8V6.8Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+                        <path d="M8 8.5h8M8 11.5h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                    </svg>
+                </span>
+                <span class="nav-label" aria-hidden="true">AI Chat</span>
+            </a>
+
+            <a class="icon-btn" href="calendar.html" aria-label="Calendar">
+                <span class="nav-item-icon" aria-hidden="true">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path d="M7 4v3M17 4v3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                        <path d="M5.5 7.5h13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                        <path d="M6.5 5.5h11c1.1 0 2 .9 2 2v11c0 1.1-.9 2-2 2h-11c-1.1 0-2-.9-2-2v-11c0-1.1.9-2 2-2Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+                        <path d="M8 11h3M8 14h3M13 11h3M13 14h3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                    </svg>
+                </span>
+                <span class="nav-label" aria-hidden="true">Calendar</span>
+            </a>
+
+            <a class="icon-btn" href="pathfinder.html" aria-label="Pathfinder">
+                <span class="nav-item-icon" aria-hidden="true">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path d="M8 12h8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                        <path d="M13 7l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </span>
+                <span class="nav-label" aria-hidden="true">Pathfinder</span>
+            </a>
+
+            <a class="icon-btn" href="performance.html" aria-label="Performance" aria-current="page">
+                <span class="nav-item-icon" aria-hidden="true">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path d="M4 12h4l2.1-5.5L13 17l2-5h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </span>
+                <span class="nav-label" aria-hidden="true">Performance</span>
+            </a>
+
+            <button class="icon-btn" type="button" aria-label="Back" data-back>
+                <span class="nav-item-icon" aria-hidden="true">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path d="M16 12H8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                        <path d="M11 7l-5 5 5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </span>
+                <span class="nav-label" aria-hidden="true">Back</span>
+            </button>
+        </div>
+
+        <div class="sidebar-bottom">
+            <div class="icon-divider" aria-hidden="true"></div>
+            <button class="icon-btn ghost" type="button" aria-label="Logout" disabled>
+                <span class="nav-item-icon" aria-hidden="true">↩︎</span>
+                <span class="nav-label" aria-hidden="true">Logout</span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="content">
+        <header class="perf-top" aria-label="Performance header">
+            <h1 class="perf-title">02/05/2026 Juan's Performance!</h1>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false"
+                aria-label="Toggle dark mode" title="Toggle day/night">
+                <span class="theme-toggle-icon" aria-hidden="true" data-theme-icon>🌙</span>
+                <span class="theme-toggle-text" data-theme-text>Night</span>
+            </button>
+        </header>
+
+        <section class="perf-shell" aria-label="Performance overview">
+            <div class="perf-split">
+                <div class="perf-left" aria-label="Persistence">
+                    <div class="perf-card perf-persistence">
+                        <div class="perf-card-head">
+                            <h2 class="perf-card-title">Persistence</h2>
+                        </div>
+                        <div class="perf-persist-row">
+                            <div class="persist-score" aria-label="Persistence score">
+                                <div class="persist-badge" aria-hidden="true">
+                                    <svg class="persist-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                        <path d="M12 2c2.2 2.8 3.3 5.2 3.3 7.2 0 2.2-1.3 3.7-3.3 3.7S8.7 11.4 8.7 9.2C8.7 7.2 9.8 4.8 12 2Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+                                        <path d="M5.5 13.2C6.6 18.3 9.3 22 12 22s5.4-3.7 6.5-8.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                                    </svg>
+                                </div>
+                                <div class="persist-score-right">
+                                    <div class="persist-score-value">100%</div>
+                                </div>
+                            </div>
+                            <div class="persist-attend" aria-label="Attendance">
+                                <div class="persist-attend-top">You've attended</div>
+                                <div class="persist-attend-value">4 / 4 Days</div>
+                            </div>
+                        </div>
+
+                        <div class="mini-cal">
+                            <div class="mini-cal-head">
+                                <div class="mini-cal-month">February</div>
+                                <div class="mini-cal-year">2026</div>
+                            </div>
+                            <div class="mini-cal-dow" aria-hidden="true">
+                                <div class="mini-dow">SAT</div>
+                                <div class="mini-dow">SUN</div>
+                                <div class="mini-dow">MON</div>
+                                <div class="mini-dow">TUE</div>
+                                <div class="mini-dow">WED</div>
+                                <div class="mini-dow">THU</div>
+                                <div class="mini-dow">FRI</div>
+                            </div>
+                            <div class="mini-cal-grid" role="grid" aria-label="February 2026">
+                                <div class="mini-day mini-day--outside" role="gridcell"><div class="mini-day-num">31</div></div>
+
+                                <div class="mini-day mini-day--photo" role="gridcell"><div class="mini-day-num">01</div><div class="mini-avatars" aria-hidden="true"><span class="mini-avatar a1"></span></div></div>
+                                <div class="mini-day mini-day--photo" role="gridcell"><div class="mini-day-num">02</div><div class="mini-avatars" aria-hidden="true"><span class="mini-avatar a2"></span></div></div>
+                                <div class="mini-day mini-day--photo" role="gridcell"><div class="mini-day-num">03</div><div class="mini-avatars" aria-hidden="true"><span class="mini-avatar a3"></span></div></div>
+                                <div class="mini-day mini-day--photo" role="gridcell"><div class="mini-day-num">04</div><div class="mini-avatars" aria-hidden="true"><span class="mini-avatar a4"></span></div></div>
+
+                                <div class="mini-day mini-day--today" role="gridcell"><div class="mini-day-num">05</div><div class="mini-day-muted">No Class</div></div>
+                                <div class="mini-day" role="gridcell"><div class="mini-day-num">06</div><div class="mini-day-muted">No Class</div></div>
+
+                                <div class="mini-day" role="gridcell"><div class="mini-day-num">07</div><div class="mini-day-muted">No Class</div></div>
+                                <div class="mini-day" role="gridcell"><div class="mini-day-num">08</div><div class="mini-day-muted">No Class</div></div>
+                                <div class="mini-day" role="gridcell"><div class="mini-day-num">09</div><div class="mini-day-muted">No Class</div></div>
+                                <div class="mini-day" role="gridcell"><div class="mini-day-num">10</div><div class="mini-day-muted">No Class</div></div>
+                                <div class="mini-day" role="gridcell"><div class="mini-day-num">11</div><div class="mini-day-muted">No Class</div></div>
+                                <div class="mini-day" role="gridcell"><div class="mini-day-num">12</div><div class="mini-day-muted">No Class</div></div>
+                                <div class="mini-day" role="gridcell"><div class="mini-day-num">13</div><div class="mini-day-muted">No Class</div></div>
+
+                                <div class="mini-day" role="gridcell"><div class="mini-day-num">14</div><div class="mini-day-muted">No Class</div></div>
+                                <div class="mini-day" role="gridcell"><div class="mini-day-num">15</div><div class="mini-day-muted">No Class</div></div>
+                                <div class="mini-day" role="gridcell"><div class="mini-day-num">16</div><div class="mini-day-muted">No Class</div></div>
+                                <div class="mini-day" role="gridcell"><div class="mini-day-num">17</div><div class="mini-day-muted">No Class</div></div>
+                                <div class="mini-day" role="gridcell"><div class="mini-day-num">18</div><div class="mini-day-muted">No Class</div></div>
+                                <div class="mini-day" role="gridcell"><div class="mini-day-num">19</div><div class="mini-day-muted">No Class</div></div>
+                                <div class="mini-day" role="gridcell"><div class="mini-day-num">20</div><div class="mini-day-muted">No Class</div></div>
+
+                                <div class="mini-day" role="gridcell"><div class="mini-day-num">21</div><div class="mini-day-muted">No Class</div></div>
+                                <div class="mini-day" role="gridcell"><div class="mini-day-num">22</div><div class="mini-day-muted">No Class</div></div>
+                                <div class="mini-day" role="gridcell"><div class="mini-day-num">23</div><div class="mini-day-muted">No Class</div></div>
+                                <div class="mini-day" role="gridcell"><div class="mini-day-num">24</div><div class="mini-day-muted">No Class</div></div>
+                                <div class="mini-day" role="gridcell"><div class="mini-day-num">25</div><div class="mini-day-muted">No Class</div></div>
+                                <div class="mini-day" role="gridcell"><div class="mini-day-num">26</div><div class="mini-day-muted">No Class</div></div>
+                                <div class="mini-day" role="gridcell"><div class="mini-day-num">27</div><div class="mini-day-muted">No Class</div></div>
+
+                                <div class="mini-day" role="gridcell"><div class="mini-day-num">28</div><div class="mini-day-muted">No Class</div></div>
+                                <div class="mini-day mini-day--outside" role="gridcell"><div class="mini-day-num">01</div></div>
+                                <div class="mini-day mini-day--outside" role="gridcell"><div class="mini-day-num">02</div></div>
+                                <div class="mini-day mini-day--outside" role="gridcell"><div class="mini-day-num">03</div></div>
+                                <div class="mini-day mini-day--outside" role="gridcell"><div class="mini-day-num">04</div></div>
+                                <div class="mini-day mini-day--outside" role="gridcell"><div class="mini-day-num">05</div></div>
+                                <div class="mini-day mini-day--outside" role="gridcell"><div class="mini-day-num">06</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="perf-divider" aria-hidden="true"></div>
+
+                <div class="perf-right" aria-label="Inbox">
+                    <div class="perf-inbox">
+                        <div class="inbox-top">
+                            <h2 class="inbox-title">Inbox</h2>
+                            <div class="inbox-controls" aria-label="Inbox controls">
+                                <select class="inbox-filter" aria-label="Filter" disabled>
+                                    <option>All</option>
+                                </select>
+                                <div class="inbox-search" aria-label="Search">
+                                    <input class="inbox-search-input" type="search" placeholder="Search" aria-label="Search inbox" disabled />
+                                    <span class="inbox-search-icon" aria-hidden="true">⌕</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="inbox-table" role="table" aria-label="Inbox list">
+                            <div class="inbox-head" role="row">
+                                <div class="inbox-col" role="columnheader">DATE</div>
+                                <div class="inbox-col" role="columnheader">TYPE</div>
+                                <div class="inbox-col inbox-col--grow" role="columnheader">ACTIVITY</div>
+                                <div class="inbox-col" role="columnheader">COMPLETE</div>
+                                <div class="inbox-col" role="columnheader">FEEDBACK</div>
+                            </div>
+
+                            <article class="inbox-item inbox-item--attention" role="row" aria-label="Activity needs attention" tabindex="0" aria-expanded="false">
+                                <div class="inbox-cell" role="cell">02/02/26</div>
+                                <div class="inbox-cell" role="cell"><span class="chip">group</span></div>
+                                <div class="inbox-cell inbox-col--grow" role="cell">
+                                    <div class="inbox-activity">Product analysis: Busin...</div>
+                                    <div class="inbox-details" hidden>
+                                        <div class="inbox-callout-title">This activity needs your attention</div>
+                                        <div class="inbox-callout-sub">You haven't completed this activity yet.</div>
+                                        <button class="inbox-action" type="button" disabled>Complete this activity <span aria-hidden="true">↗</span></button>
+                                    </div>
+                                </div>
+                                <div class="inbox-cell" role="cell"><span class="dot dot--pink" aria-hidden="true"></span></div>
+                                <div class="inbox-cell" role="cell"></div>
+                            </article>
+
+                            <article class="inbox-item" role="row" aria-label="Submitted activity" tabindex="0" aria-expanded="false">
+                                <div class="inbox-cell" role="cell">02/01/26</div>
+                                <div class="inbox-cell" role="cell"><span class="chip">assessment</span></div>
+                                <div class="inbox-cell inbox-col--grow" role="cell">
+                                    <div class="inbox-activity">Week 2 assessment [Te...</div>
+                                    <div class="inbox-details" hidden>
+                                        <div class="inbox-status inbox-status--ok">Submitted!</div>
+                                        <div class="inbox-status-sub">Great job completing this activity. Feedback will be available soon.</div>
+                                    </div>
+                                </div>
+                                <div class="inbox-cell" role="cell"><span class="dot dot--purple" aria-hidden="true"></span></div>
+                                <div class="inbox-cell" role="cell"></div>
+                            </article>
+
+                            <article class="inbox-item inbox-item--selected" role="row" aria-label="Selected submitted activity" tabindex="0" aria-expanded="false">
+                                <div class="inbox-cell" role="cell">02/01/26</div>
+                                <div class="inbox-cell" role="cell"><span class="chip">assessment</span></div>
+                                <div class="inbox-cell inbox-col--grow" role="cell">
+                                    <div class="inbox-activity">Week 2 assessment [B...</div>
+                                    <div class="inbox-details" hidden>
+                                        <div class="inbox-status inbox-status--ok">Submitted!</div>
+                                        <div class="inbox-status-sub">Great job completing this activity. Feedback will be available soon.</div>
+                                    </div>
+                                </div>
+                                <div class="inbox-cell" role="cell"><span class="dot dot--purple" aria-hidden="true"></span></div>
+                                <div class="inbox-cell" role="cell"></div>
+                            </article>
+
+                            <article class="inbox-item" role="row" aria-label="Activity needs attention" tabindex="0" aria-expanded="false">
+                                <div class="inbox-cell" role="cell">02/01/26</div>
+                                <div class="inbox-cell" role="cell"><span class="chip">assessment</span></div>
+                                <div class="inbox-cell inbox-col--grow" role="cell">
+                                    <div class="inbox-activity">Week 2 assessment [Pr...</div>
+                                    <div class="inbox-details" hidden>
+                                        <div class="inbox-callout-title">This activity needs your attention</div>
+                                        <div class="inbox-callout-sub">You haven't completed this activity yet.</div>
+                                        <button class="inbox-action" type="button" disabled>Complete this activity <span aria-hidden="true">↗</span></button>
+                                    </div>
+                                </div>
+                                <div class="inbox-cell" role="cell"><span class="dot dot--pink" aria-hidden="true"></span></div>
+                                <div class="inbox-cell" role="cell"></div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const THEME_STORAGE_KEY = `pursuit:theme:v1`;
+
+        function systemPrefersDark() {
+            return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        }
+
+        function getStoredTheme() {
+            try {
+                const t = localStorage.getItem(THEME_STORAGE_KEY);
+                return t === 'dark' || t === 'light' ? t : null;
+            } catch {
+                return null;
+            }
+        }
+
+        function setStoredTheme(theme) {
+            try {
+                localStorage.setItem(THEME_STORAGE_KEY, theme);
+            } catch {
+                // ignore
+            }
+        }
+
+        function applyTheme(theme) {
+            const root = document.documentElement;
+            root.dataset.theme = theme;
+
+            const btn = document.querySelector('[data-theme-toggle]');
+            const icon = document.querySelector('[data-theme-icon]');
+            const text = document.querySelector('[data-theme-text]');
+            const isDark = theme === 'dark';
+
+            if (btn) btn.setAttribute('aria-pressed', String(isDark));
+            if (icon) icon.textContent = isDark ? '☀️' : '🌙';
+            if (text) text.textContent = isDark ? 'Day' : 'Night';
+        }
+
+        function initThemeToggle() {
+            const btn = document.querySelector('[data-theme-toggle]');
+            const initial = getStoredTheme() || (systemPrefersDark() ? 'dark' : 'light');
+            applyTheme(initial);
+
+            if (!btn) return;
+            btn.addEventListener('click', () => {
+                const current = document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
+                const next = current === 'dark' ? 'light' : 'dark';
+                setStoredTheme(next);
+                applyTheme(next);
+            });
+
+            if (window.matchMedia) {
+                const media = window.matchMedia('(prefers-color-scheme: dark)');
+                const onChange = () => {
+                    if (getStoredTheme()) return;
+                    applyTheme(systemPrefersDark() ? 'dark' : 'light');
+                };
+                if (typeof media.addEventListener === 'function') media.addEventListener('change', onChange);
+                else if (typeof media.addListener === 'function') media.addListener(onChange);
+            }
+        }
+
+        function initSidebarExpandOnHighlight() {
+            const sidebar = document.querySelector('.sidebar');
+            if (!sidebar) return;
+
+            const expand = () => document.body.classList.add('sidebar-expanded');
+            const collapse = () => document.body.classList.remove('sidebar-expanded');
+
+            sidebar.addEventListener('mouseenter', expand);
+            sidebar.addEventListener('mouseleave', collapse);
+
+            sidebar.addEventListener('focusin', expand);
+            sidebar.addEventListener('focusout', () => {
+                window.setTimeout(() => {
+                    if (!sidebar.contains(document.activeElement)) collapse();
+                }, 0);
+            });
+        }
+
+        function toggleInboxItem(item) {
+            if (!item) return;
+            const expanded = item.classList.toggle('inbox-item--expanded');
+            item.setAttribute('aria-expanded', String(expanded));
+            const details = item.querySelector('.inbox-details');
+            if (details) details.hidden = !expanded;
+        }
+
+        function initInboxAccordion() {
+            const items = Array.from(document.querySelectorAll('.inbox-item'));
+            for (const item of items) {
+                const details = item.querySelector('.inbox-details');
+                if (details) details.hidden = true;
+                item.setAttribute('aria-expanded', 'false');
+
+                item.addEventListener('click', (e) => {
+                    if (e.target.closest('button, a, input, select, textarea, label')) return;
+                    toggleInboxItem(item);
+                });
+
+                item.addEventListener('keydown', (e) => {
+                    if (e.key !== 'Enter' && e.key !== ' ') return;
+                    e.preventDefault();
+                    toggleInboxItem(item);
+                });
+            }
+        }
+
+        initThemeToggle();
+        initSidebarExpandOnHighlight();
+        initInboxAccordion();
+    </script>
+
+    <div class="page-loader" data-page-loader aria-hidden="false">
+        <div class="page-loader-inner">
+            <div class="page-loader-logo" aria-hidden="true">
+                <svg class="pursuit-mark" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M26 54V16" stroke="currentColor" stroke-width="6" stroke-linecap="round" />
+                    <path d="M26 30C26 23 31 18 38 18C45 18 50 23 50 30C50 37 45 42 38 42C31 42 26 37 26 30" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M22 18C24 10 32 7 39 9C44 10 47 13 50 16" stroke="currentColor" stroke-width="6" stroke-linecap="round" />
+                    <path d="M50 16L56 8" stroke="currentColor" stroke-width="6" stroke-linecap="round" />
+                    <path d="M56 8V20" stroke="currentColor" stroke-width="6" stroke-linecap="round" />
+                    <path d="M56 8H44" stroke="currentColor" stroke-width="6" stroke-linecap="round" />
+                </svg>
+            </div>
+            <div class="page-loader-title">LOADING</div>
+            <div class="page-loader-progress"><span data-loader-percent>1</span>%</div>
+        </div>
+    </div>
+
+</body>
+
+</html>
