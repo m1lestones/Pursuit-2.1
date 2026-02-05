@@ -3,7 +3,7 @@
 **Product:** Pursuit Student Dashboard – Weekly Curriculum View  
 **Author:** Juan  
 **Date:** Feb 2, 2026  
-**Version:** v1.1  
+**Version:** v1.2  
 
 ## 0) 🧾 Changelog
 ### v1.0 → v1.1
@@ -11,6 +11,16 @@
 - Added lunch timer with end-of-break notifications (Notification API + toast fallback)
 - Added missed assignment attention pattern (pulse + hourly reminders)
 - Added small iconography for high-signal actions (e.g., submit/upload/watch)
+
+### v1.1 → v1.2
+- Added task completion persistence (checkbox state saved locally)
+- Added horizontal day rail with left/right controls (easier week scanning)
+- Added selected day highlight (persists your last clicked day)
+- Added click-to-open day detail screen (new page) with persisted selected day
+- Added day/night theme toggle (follows system preference by default)
+- Improved dark mode contrast using theme-aware CSS variables
+- Added swipe/trackpad navigation in day detail view (left/right to switch days)
+- Added assignment search (typeahead) to jump to a specific day/task quickly
 
 ## 1) 📌 Problem Statement
 Pursuit’s student dashboard presents a week-based curriculum view that helps learners track daily activities, assessments, and deliverables. While functional and information-rich, students experience cognitive overload, weak visual hierarchy, and limited interaction clarity—especially during weeks with multiple assessments.
@@ -133,6 +143,59 @@ Make missed assignments hard to overlook.
   - Fallback to in-page toast
 - Respect reduced-motion preferences
 
+### 6.9 Task Completion Persistence (New in v1.2)
+Persist a student’s task checkmarks so progress isn’t lost on refresh.
+
+**Requirements**
+- Checkbox state is saved locally per task/day
+- Reloading the page restores completion state
+- Works on both the dashboard week view and the day detail view
+
+### 6.10 Day Detail View + Navigation (New in v1.2)
+Allow students to click a day card and view that day on its own screen (like Pursuit), reducing clutter and enabling focused execution.
+
+**Requirements**
+- Clicking a day card opens a dedicated day page
+- Day page shows the same activities list with tags and checkboxes
+- Back navigation returns to the dashboard
+- Selected day is remembered (so deep links and refreshes remain stable)
+
+### 6.11 Theme Toggle (Day/Night) (New in v1.2)
+Allow students to toggle between light and dark themes.
+
+**Requirements**
+- Toggle available on dashboard and day detail view
+- Theme persists across page reloads
+- Defaults to system preference when the user has not chosen a theme
+- Dark mode maintains readable contrast for key content
+
+### 6.12 Swipe / Trackpad Day Switching (New in v1.2)
+In the day detail view, support quickly switching days using touchpad or touch gestures.
+
+**Requirements**
+- Trackpad horizontal gestures switch to next/previous day
+- Touch swipe left/right switches to next/previous day on mobile/tablet
+- Must not break vertical scrolling
+- Optional keyboard support (Left/Right arrow) is allowed
+
+### 6.13 Assignment Search + Jump to Day (New in v1.2)
+Enable a “type to find” experience so students can jump directly to an assessment/assignment without scanning all days.
+
+**Requirements**
+- Search input in the top bar
+- As the user types, show a dropdown of matching assignments across the week
+- Selecting a result navigates to that assignment’s day
+- Keyboard navigation supported (↑/↓/Enter/Esc)
+- Shortcut supported: `Cmd/Ctrl + K` focuses search (optional but recommended)
+
+### 6.14 Horizontal Day Rail (New in v1.2)
+Improve week scanning by presenting days in a horizontal, scrollable rail with left/right controls.
+
+**Requirements**
+- Day cards are horizontally scrollable
+- Buttons scroll left/right by about one card
+- Scroll snapping keeps cards aligned
+
 ## 7) 🚫 Out of Scope (This Version)
 - Mobile-first redesign
 - Calendar sync / external reminders integration
@@ -149,6 +212,7 @@ Make missed assignments hard to overlook.
 ## 9) ✅ Implementation Notes (Current Prototype)
 Implemented in:
 - [index.html](index.html) (structure + JS behaviors)
+- [day.html](day.html) (day detail view)
 - [styles.css](styles.css) (visual design + animations)
 
 Behaviors included:
@@ -157,3 +221,8 @@ Behaviors included:
 - Next best action scroll + expand + highlight
 - Lunch timer + notifications/toast fallback
 - Missed assignment pulsing + hourly reminder
+- Task completion persistence via `localStorage`
+- Click-to-highlight selected day and persist it
+- Navigation from dashboard → day detail view via `day.html?day=...`
+- Swipe/trackpad day switching on day detail view
+- Assignment search + jump-to-day (typeahead)

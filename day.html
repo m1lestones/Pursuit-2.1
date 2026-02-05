@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pursuit Dashboard • Day</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="day-view">
+    <nav class="sidebar" aria-label="Primary">
+        <div class="sidebar-top">
+            <div class="logo" aria-label="Pursuit">
+                <span class="logo-mark" aria-hidden="true">p</span>
+            </div>
+        </div>
+        <div class="nav-icons" aria-label="Navigation">
+            <button class="icon-btn" type="button" aria-label="Curriculum">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M4 6.5c0-1.4 1.1-2.5 2.5-2.5H20v16H6.5C5.1 20 4 18.9 4 17.5V6.5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+                    <path d="M8 7.5h8M8 11h8M8 14.5h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                    <path d="M6.5 4C5.1 4 4 5.1 4 6.5S5.1 9 6.5 9H20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+                </svg>
+            </button>
+
+            <button class="icon-btn" type="button" aria-label="Messages">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M5 6.8C5 5.25 6.25 4 7.8 4h8.4C17.75 4 19 5.25 19 6.8v6.4c0 1.55-1.25 2.8-2.8 2.8H10l-4.1 3.1c-.5.38-1.2.02-1.2-.6V16c-.46-.5-.7-1.13-.7-1.8V6.8Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+                    <path d="M8 8.5h8M8 11.5h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                </svg>
+            </button>
+
+            <button class="icon-btn" type="button" aria-label="Calendar" aria-current="page">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M7 4v3M17 4v3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                    <path d="M5.5 7.5h13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                    <path d="M6.5 5.5h11c1.1 0 2 .9 2 2v11c0 1.1-.9 2-2 2h-11c-1.1 0-2-.9-2-2v-11c0-1.1.9-2 2-2Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+                    <path d="M8 11h3M8 14h3M13 11h3M13 14h3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                </svg>
+            </button>
+
+            <button class="icon-btn" type="button" aria-label="Go back" data-back>
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M16 12H8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                    <path d="M11 7l-5 5 5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </button>
+        </div>
+
+        <div class="sidebar-bottom" aria-hidden="true">
+            <div class="icon-divider"></div>
+            <div class="icon-btn ghost">↥</div>
+        </div>
+    </nav>
+
+    <main class="content">
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="btn btn-secondary dayview-back" type="button" data-back>
+                    ← Back
+                </button>
+            </div>
+            <div class="topbar-right">
+                <div class="topbar-search" data-assignment-search>
+                    <input class="search-input" type="search" autocomplete="off" spellcheck="false"
+                        placeholder="Find assignment…" aria-label="Find assignment" data-search-input />
+                    <div class="search-results" role="listbox" hidden data-search-results></div>
+                </div>
+                <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false"
+                    aria-label="Toggle dark mode" title="Toggle day/night">
+                    <span class="theme-toggle-icon" aria-hidden="true" data-theme-icon>🌙</span>
+                    <span class="theme-toggle-text" data-theme-text>Night</span>
+                </button>
+            </div>
+        </header>
+
+        <section class="dayview" aria-label="Day details">
+            <div class="dayview-shell">
+                <div class="dayview-kicker" data-day-kicker></div>
+                <h1 class="dayview-title" data-day-title>Day</h1>
+
+                <div class="dayview-section" aria-label="Activities">
+                    <div class="dayview-section-title">Activities</div>
+                    <ul class="dayview-list" data-day-list></ul>
+                </div>
+
+                <div class="dayview-actions">
+                    <button class="btn btn-primary dayview-go" type="button" data-go>Go!</button>
+                </div>
+
+                <div class="dayview-empty" hidden data-empty>
+                    <p>
+                        I couldn’t load this day’s data yet.
+                        Open the dashboard first, then click a day card.
+                    </p>
+                    <a class="btn btn-secondary" href="index.html">Open dashboard</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const TEST_MODE = new URLSearchParams(window.location.search).has('test');
+        const TASKS_STORAGE_KEY = `pursuit:taskChecks:v1${TEST_MODE ? ':test' : ''}`;
+        const CURRICULUM_STORAGE_KEY = `pursuit:curriculum:v1${TEST_MODE ? ':test' : ''}`;
+        const SELECTED_DAY_STORAGE_KEY = `pursuit:selectedDay:v1${TEST_MODE ? ':test' : ''}`;
+        const THEME_STORAGE_KEY = `pursuit:theme:v1`;
+
+        function loadJson(key, fallback) {
+            try {
+                const raw = localStorage.getItem(key);
+                return raw ? JSON.parse(raw) : fallback;
+            } catch {
+                return fallback;
+            }
+        }
+
+        function saveJson(key, value) {
+            try {
+                localStorage.setItem(key, JSON.stringify(value));
+            } catch {
+                // ignore
+            }
+        }
+
+        function systemPrefersDark() {
+            return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        }
+
+        function getStoredTheme() {
+            try {
+                const t = localStorage.getItem(THEME_STORAGE_KEY);
+                return t === 'dark' || t === 'light' ? t : null;
+            } catch {
+                return null;
+            }
+        }
+
+        function setStoredTheme(theme) {
+            try {
+                localStorage.setItem(THEME_STORAGE_KEY, theme);
+            } catch {
+                // ignore
+            }
+        }
+
+        function applyTheme(theme) {
+            const root = document.documentElement;
+            root.dataset.theme = theme;
+
+            const btn = document.querySelector('[data-theme-toggle]');
+            const icon = document.querySelector('[data-theme-icon]');
+            const text = document.querySelector('[data-theme-text]');
+            const isDark = theme === 'dark';
+
+            if (btn) btn.setAttribute('aria-pressed', String(isDark));
+            if (icon) icon.textContent = isDark ? '☀️' : '🌙';
+            if (text) text.textContent = isDark ? 'Day' : 'Night';
+        }
+
+        function initThemeToggle() {
+            const btn = document.querySelector('[data-theme-toggle]');
+            const initial = getStoredTheme() || (systemPrefersDark() ? 'dark' : 'light');
+            applyTheme(initial);
+
+            if (!btn) return;
+            btn.addEventListener('click', () => {
+                const current = document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
+                const next = current === 'dark' ? 'light' : 'dark';
+                setStoredTheme(next);
+                applyTheme(next);
+            });
+
+            if (window.matchMedia) {
+                const media = window.matchMedia('(prefers-color-scheme: dark)');
+                const onChange = () => {
+                    if (getStoredTheme()) return;
+                    applyTheme(systemPrefersDark() ? 'dark' : 'light');
+                };
+                if (typeof media.addEventListener === 'function') media.addEventListener('change', onChange);
+                else if (typeof media.addListener === 'function') media.addListener(onChange);
+            }
+        }
+
+        function getSelectedDay() {
+            const params = new URLSearchParams(window.location.search);
+            const day = params.get('day');
+            if (day) return day;
+            try {
+                return localStorage.getItem(SELECTED_DAY_STORAGE_KEY);
+            } catch {
+                return null;
+            }
+        }
+
+        function taskKey({ day, idx, title }) {
+            const safeTitle = encodeURIComponent(String(title || 'task').slice(0, 80));
+            return `${day}:task:${idx}:${safeTitle}`;
+        }
+
+        function renderDay(dayId, dayData) {
+            const kicker = document.querySelector('[data-day-kicker]');
+            const title = document.querySelector('[data-day-title]');
+            const list = document.querySelector('[data-day-list]');
+            const empty = document.querySelector('[data-empty]');
+            if (!kicker || !title || !list || !empty) return;
+
+            if (!dayId || !dayData) {
+                empty.hidden = false;
+                return;
+            }
+
+            empty.hidden = true;
+            kicker.textContent = dayData.dateShort || '';
+            title.textContent = dayData.goal || dayData.dateLong || 'Day';
+
+            const taskState = loadJson(TASKS_STORAGE_KEY, {});
+            list.innerHTML = '';
+
+            for (const [idx, item] of (dayData.items || []).entries()) {
+                if (item.type === 'separator') {
+                    const li = document.createElement('li');
+                    li.className = 'dayview-sep';
+                    li.textContent = item.label || '';
+                    list.appendChild(li);
+                    continue;
+                }
+
+                const li = document.createElement('li');
+                li.className = 'dayview-item';
+
+                const key = taskKey({ day: dayId, idx, title: item.title });
+                const checked = Boolean(taskState[key]);
+
+                li.innerHTML = `
+                    <label class="dayview-checkwrap">
+                        <input class="dayview-check" type="checkbox" ${checked ? 'checked' : ''} />
+                        <span class="dayview-item-title">${item.title}</span>
+                    </label>
+                    <div class="dayview-item-right">
+                        <span class="tag tag--${item.tag}"><span aria-hidden="true">${item.emoji}</span> ${item.tag}</span>
+                    </div>
+                `;
+
+                const check = li.querySelector('.dayview-check');
+                if (check) {
+                    check.addEventListener('change', () => {
+                        const state = loadJson(TASKS_STORAGE_KEY, {});
+                        state[key] = Boolean(check.checked);
+                        saveJson(TASKS_STORAGE_KEY, state);
+                    });
+                }
+
+                list.appendChild(li);
+            }
+        }
+
+        function getOrderedDayIds(curriculum) {
+            const ids = Object.keys(curriculum || {});
+            // Prefer ISO dates (YYYY-MM-DD) since they sort correctly.
+            const iso = ids.filter((id) => /^\d{4}-\d{2}-\d{2}$/.test(id)).sort();
+            if (iso.length) return iso;
+            return ids.sort();
+        }
+
+        function setSelectedDay(dayId) {
+            if (!dayId) return;
+            try {
+                localStorage.setItem(SELECTED_DAY_STORAGE_KEY, dayId);
+            } catch {
+                // ignore
+            }
+        }
+
+        function updateUrlDay(dayId, { replace = true } = {}) {
+            if (!dayId) return;
+            const url = new URL(window.location.href);
+            url.searchParams.set('day', dayId);
+            if (TEST_MODE) url.searchParams.set('test', '1');
+            else url.searchParams.delete('test');
+            if (replace) window.history.replaceState({ day: dayId }, '', url);
+            else window.history.pushState({ day: dayId }, '', url);
+        }
+
+        function initSwipeDayNavigation({ getDayId, curriculum }) {
+            const ordered = getOrderedDayIds(curriculum);
+            if (!ordered.length) return;
+
+            const clampIndex = (idx) => Math.max(0, Math.min(ordered.length - 1, idx));
+            const indexOfDay = (dayId) => {
+                const idx = ordered.indexOf(dayId);
+                return idx >= 0 ? idx : 0;
+            };
+
+            const navigateBy = (delta) => {
+                const current = getDayId();
+                const nextIdx = clampIndex(indexOfDay(current) + delta);
+                const nextDay = ordered[nextIdx];
+                if (!nextDay || nextDay === current) return;
+
+                setSelectedDay(nextDay);
+                updateUrlDay(nextDay, { replace: true });
+                renderDay(nextDay, curriculum[nextDay]);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+
+            // Keyboard support (nice on laptops): ← / →
+            window.addEventListener('keydown', (e) => {
+                if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+                if (e.target && (e.target.closest?.('input, textarea, select') || e.target.isContentEditable)) return;
+                navigateBy(e.key === 'ArrowRight' ? 1 : -1);
+            });
+
+            // Trackpad horizontal scroll: use WheelEvent deltaX accumulation.
+            let wheelAccumX = 0;
+            let lastWheelTs = 0;
+            let lastNavTs = 0;
+            window.addEventListener(
+                'wheel',
+                (e) => {
+                    const now = Date.now();
+                    const dx = e.deltaX || 0;
+                    const dy = e.deltaY || 0;
+                    if (Math.abs(dx) < Math.abs(dy) * 1.2) return;
+                    if (Math.abs(dx) < 8) return;
+
+                    // Reset accumulator after a pause.
+                    if (now - lastWheelTs > 240) wheelAccumX = 0;
+                    lastWheelTs = now;
+                    wheelAccumX += dx;
+
+                    // Throttle so one swipe = one navigation.
+                    if (now - lastNavTs < 650) return;
+
+                    if (Math.abs(wheelAccumX) >= 140) {
+                        lastNavTs = now;
+                        const dir = wheelAccumX > 0 ? 1 : -1;
+                        wheelAccumX = 0;
+                        navigateBy(dir);
+                    }
+                },
+                { passive: true }
+            );
+
+            // Touch swipe (phones/tablets)
+            let touchStartX = null;
+            let touchStartY = null;
+            window.addEventListener(
+                'touchstart',
+                (e) => {
+                    if (!e.touches || e.touches.length !== 1) return;
+                    touchStartX = e.touches[0].clientX;
+                    touchStartY = e.touches[0].clientY;
+                },
+                { passive: true }
+            );
+            window.addEventListener(
+                'touchend',
+                (e) => {
+                    if (touchStartX == null || touchStartY == null) return;
+                    const t = e.changedTouches && e.changedTouches[0];
+                    if (!t) return;
+                    const dx = t.clientX - touchStartX;
+                    const dy = t.clientY - touchStartY;
+                    touchStartX = null;
+                    touchStartY = null;
+
+                    if (Math.abs(dx) < 70) return;
+                    if (Math.abs(dx) < Math.abs(dy) * 1.2) return;
+
+                    // Swipe left => next day, swipe right => previous day.
+                    navigateBy(dx < 0 ? 1 : -1);
+                },
+                { passive: true }
+            );
+
+            window.addEventListener('popstate', () => {
+                const current = getSelectedDay();
+                const dayData = curriculum && current ? curriculum[current] : null;
+                renderDay(current, dayData);
+            });
+        }
+
+        function buildAssignmentIndexFromCurriculum(curriculum) {
+            const orderedDays = getOrderedDayIds(curriculum);
+            const dayOrder = new Map(orderedDays.map((d, i) => [d, i]));
+            const index = [];
+
+            for (const day of orderedDays) {
+                const dayData = curriculum[day];
+                if (!dayData) continue;
+                const items = Array.isArray(dayData.items) ? dayData.items : [];
+                let taskIdx = 0;
+                for (const item of items) {
+                    if (!item || item.type !== 'task') continue;
+                    const title = String(item.title || '').trim();
+                    if (!title) continue;
+                    const tag = item.tag || 'optional';
+                    index.push({
+                        day,
+                        dateShort: dayData.dateShort || '',
+                        title,
+                        tag,
+                        emoji: item.emoji || (tag === 'required' ? '🔴' : tag === 'recommended' ? '🟡' : '⚪'),
+                        dayIdx: dayOrder.get(day) ?? 9999,
+                        taskIdx: taskIdx++,
+                    });
+                }
+            }
+            return index;
+        }
+
+        function initAssignmentSearch({ curriculum }) {
+            const wrap = document.querySelector('[data-assignment-search]');
+            const input = document.querySelector('[data-search-input]');
+            const resultsEl = document.querySelector('[data-search-results]');
+            if (!wrap || !input || !resultsEl) return;
+            if (!curriculum || typeof curriculum !== 'object') return;
+
+            let assignmentIndex = buildAssignmentIndexFromCurriculum(curriculum);
+            let activeIndex = -1;
+            let lastQuery = '';
+
+            const close = () => {
+                resultsEl.hidden = true;
+                resultsEl.innerHTML = '';
+                activeIndex = -1;
+            };
+
+            const setActive = (idx) => {
+                const options = Array.from(resultsEl.querySelectorAll('[data-search-option]'));
+                if (!options.length) {
+                    activeIndex = -1;
+                    return;
+                }
+                activeIndex = Math.max(0, Math.min(options.length - 1, idx));
+                for (const [i, el] of options.entries()) {
+                    if (i === activeIndex) el.setAttribute('aria-selected', 'true');
+                    else el.removeAttribute('aria-selected');
+                }
+                options[activeIndex].scrollIntoView({ block: 'nearest' });
+            };
+
+            const selectResult = (item) => {
+                if (!item?.day) return;
+                setSelectedDay(item.day);
+                updateUrlDay(item.day, { replace: true });
+                renderDay(item.day, curriculum[item.day]);
+                close();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+
+            const renderResults = (items, query) => {
+                resultsEl.innerHTML = '';
+                if (!query) {
+                    close();
+                    return;
+                }
+
+                if (!items.length) {
+                    const empty = document.createElement('div');
+                    empty.className = 'search-empty';
+                    empty.textContent = 'No matches.';
+                    resultsEl.appendChild(empty);
+                    resultsEl.hidden = false;
+                    return;
+                }
+
+                for (const item of items) {
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = 'search-option';
+                    btn.setAttribute('role', 'option');
+                    btn.setAttribute('data-search-option', '');
+                    btn.innerHTML = `
+                        <div class="search-option-main">
+                            <div class="search-option-title">${item.title}</div>
+                            <div class="search-option-meta">${item.dateShort || item.day}</div>
+                        </div>
+                        <div class="search-option-right">
+                            <span class="tag tag--${item.tag}"><span aria-hidden="true">${item.emoji}</span> ${item.tag}</span>
+                        </div>
+                    `;
+                    btn.addEventListener('click', () => selectResult(item));
+                    resultsEl.appendChild(btn);
+                }
+
+                resultsEl.hidden = false;
+                setActive(0);
+            };
+
+            const search = (query) => {
+                const q = String(query || '').trim().toLowerCase();
+                lastQuery = q;
+                if (!q) {
+                    close();
+                    return;
+                }
+
+                assignmentIndex = buildAssignmentIndexFromCurriculum(curriculum);
+                const filtered = assignmentIndex
+                    .filter((it) => it.title.toLowerCase().includes(q))
+                    .sort((a, b) => {
+                        if (a.dayIdx !== b.dayIdx) return a.dayIdx - b.dayIdx;
+                        return a.taskIdx - b.taskIdx;
+                    })
+                    .slice(0, 14);
+
+                renderResults(filtered, q);
+            };
+
+            input.addEventListener('input', () => search(input.value));
+            input.addEventListener('focus', () => {
+                if (resultsEl.childElementCount > 0) resultsEl.hidden = false;
+            });
+
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    close();
+                    input.blur();
+                    return;
+                }
+                if (resultsEl.hidden) return;
+
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    setActive(activeIndex + 1);
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    setActive(activeIndex - 1);
+                } else if (e.key === 'Enter') {
+                    e.preventDefault();
+                    const q = lastQuery;
+                    const list = assignmentIndex
+                        .filter((it) => it.title.toLowerCase().includes(q))
+                        .sort((a, b) => {
+                            if (a.dayIdx !== b.dayIdx) return a.dayIdx - b.dayIdx;
+                            return a.taskIdx - b.taskIdx;
+                        })
+                        .slice(0, 14);
+                    const item = list[activeIndex];
+                    if (item) selectResult(item);
+                }
+            });
+
+            document.addEventListener('click', (e) => {
+                if (e.target.closest('[data-assignment-search]')) return;
+                close();
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+                    e.preventDefault();
+                    input.focus();
+                    input.select();
+                }
+            });
+        }
+
+        function init() {
+            initThemeToggle();
+            const dayId = getSelectedDay();
+            const curriculum = loadJson(CURRICULUM_STORAGE_KEY, null);
+            const dayData = curriculum && dayId ? curriculum[dayId] : null;
+            renderDay(dayId, dayData);
+
+            initSwipeDayNavigation({
+                getDayId: () => getSelectedDay(),
+                curriculum: curriculum || {},
+            });
+
+            initAssignmentSearch({ curriculum: curriculum || {} });
+
+            for (const el of document.querySelectorAll('[data-back]')) {
+                el.addEventListener('click', () => {
+                    window.location.href = 'index.html';
+                });
+            }
+
+            document.querySelector('[data-go]')?.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+
+        init();
+    </script>
+</body>
+
+</html>

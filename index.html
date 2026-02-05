@@ -6,26 +6,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pursuit Dashboard Replica</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
 
     <nav class="sidebar" aria-label="Primary">
         <div class="sidebar-top">
-            <div class="logo" aria-label="Pursuit">P</div>
+            <div class="logo" aria-label="Pursuit">
+                <span class="logo-mark" aria-hidden="true">p</span>
+            </div>
         </div>
         <div class="nav-icons" aria-label="Navigation">
-            <button class="icon-btn" type="button" aria-label="Dashboard">
-                <span aria-hidden="true">⊞</span>
+            <button class="icon-btn" type="button" aria-label="Curriculum">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M4 6.5c0-1.4 1.1-2.5 2.5-2.5H20v16H6.5C5.1 20 4 18.9 4 17.5V6.5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+                    <path d="M8 7.5h8M8 11h8M8 14.5h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                    <path d="M6.5 4C5.1 4 4 5.1 4 6.5S5.1 9 6.5 9H20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+                </svg>
             </button>
-            <button class="icon-btn" type="button" aria-label="Curriculum" aria-current="page">
-                <span aria-hidden="true">📅</span>
-            </button>
+
             <button class="icon-btn" type="button" aria-label="Messages">
-                <span aria-hidden="true">💬</span>
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M5 6.8C5 5.25 6.25 4 7.8 4h8.4C17.75 4 19 5.25 19 6.8v6.4c0 1.55-1.25 2.8-2.8 2.8H10l-4.1 3.1c-.5.38-1.2.02-1.2-.6V16c-.46-.5-.7-1.13-.7-1.8V6.8Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+                    <path d="M8 8.5h8M8 11.5h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                </svg>
+            </button>
+
+            <button class="icon-btn" type="button" aria-label="Calendar" aria-current="page">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M7 4v3M17 4v3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                    <path d="M5.5 7.5h13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                    <path d="M6.5 5.5h11c1.1 0 2 .9 2 2v11c0 1.1-.9 2-2 2h-11c-1.1 0-2-.9-2-2v-11c0-1.1.9-2 2-2Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+                    <path d="M8 11h3M8 14h3M13 11h3M13 14h3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                </svg>
+            </button>
+
+            <button class="icon-btn" type="button" aria-label="Go to curriculum">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M8 12h8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                    <path d="M13 7l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </button>
+
+            <button class="icon-btn" type="button" aria-label="Activity">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M4 12h4l2.1-5.5L13 17l2-5h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
             </button>
         </div>
+
         <div class="sidebar-bottom" aria-hidden="true">
             <div class="icon-divider"></div>
             <div class="icon-btn ghost">↥</div>
@@ -39,6 +69,16 @@
                 <h1 class="topbar-title">Hey Juan. Good to see you!</h1>
             </div>
             <div class="topbar-right">
+                <div class="topbar-search" data-assignment-search>
+                    <input class="search-input" type="search" autocomplete="off" spellcheck="false"
+                        placeholder="Find assignment…" aria-label="Find assignment" data-search-input />
+                    <div class="search-results" role="listbox" hidden data-search-results></div>
+                </div>
+                <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false"
+                    aria-label="Toggle dark mode" title="Toggle day/night">
+                    <span class="theme-toggle-icon" aria-hidden="true" data-theme-icon>🌙</span>
+                    <span class="theme-toggle-text" data-theme-text>Night</span>
+                </button>
                 <div class="alert-pill" role="status" aria-label="Missed assignments" data-missed-assignments>
                     <span class="alert-dot" aria-hidden="true">😬</span>
                     <span><strong data-missed-count>1</strong> missed assignments</span>
@@ -51,7 +91,8 @@
                 <div class="hero-copy">
                     <h2 class="hero-eyebrow">Today's Goal</h2>
                     <p class="hero-text">Week 2 assessment (baseline) + UI/UX patterns + wireframe your product</p>
-                    <button class="btn btn-primary btn-start" type="button"><span aria-hidden="true">▶️</span> Start</button>
+                    <button class="btn btn-primary btn-start" type="button"><span aria-hidden="true">▶️</span>
+                        Start</button>
                 </div>
             </div>
         </section>
@@ -60,14 +101,16 @@
             <div class="week-header">
                 <div class="week-title">
                     <div class="week-kicker">L2: Week 2</div>
-                    <div class="week-subtitle">Deeply analyze a product you love, learn UI/UX patterns to understand why it works, and write a Full PRD together</div>
+                    <div class="week-subtitle">Deeply analyze a product you love, learn UI/UX patterns to understand why
+                        it works, and write a Full PRD together</div>
 
                     <div class="week-progress" aria-label="Weekly progress">
                         <div class="progress-line">
                             <span class="progress-label">Weekly progress</span>
                             <span class="progress-count" data-week-progress>0 / 0</span>
                         </div>
-                        <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-week-progressbar>
+                        <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
+                            data-week-progressbar>
                             <div class="progress-fill" data-week-progressfill></div>
                         </div>
                     </div>
@@ -83,11 +126,20 @@
                 </div>
             </div>
 
-            <div class="dashboard-grid" role="list">
+            <div class="dashboard-scroll" aria-label="Week days">
+                <button class="scroll-btn" type="button" data-scroll-left aria-label="Scroll days left">‹</button>
+                <div class="dashboard-scroll-viewport" data-dashboard-viewport>
+                    <div class="dashboard-grid" role="list">
                 <article class="day-card" data-day="2026-01-31" role="listitem" aria-label="Saturday">
                     <div class="day-head">
                         <div class="day-date">1.31 SAT</div>
-                        <div class="day-chip" aria-hidden="true">›</div>
+                        <div class="day-head-actions">
+                            <button class="expand-btn" type="button" data-expand-day aria-label="Expand day"
+                                aria-expanded="false">
+                                <span aria-hidden="true">⤢</span>
+                            </button>
+                            <div class="day-chip" aria-hidden="true">›</div>
+                        </div>
                     </div>
 
                     <div class="day-section-title">Activities</div>
@@ -111,7 +163,8 @@
                         <li class="task" data-tag="required">
                             <div class="task-row">
                                 <label class="task-checkwrap">
-                                    <input class="task-check" type="checkbox" aria-label="Mark Week 2 kick-off complete">
+                                    <input class="task-check" type="checkbox"
+                                        aria-label="Mark Week 2 kick-off complete">
                                     <span class="task-title">Week 2 kick-off</span>
                                 </label>
                                 <div class="task-right">
@@ -120,23 +173,27 @@
                                 </div>
                             </div>
                             <div class="task-detail" hidden>
-                                <p class="task-desc">Overview of expectations, deliverables, and the assessment schedule.</p>
+                                <p class="task-desc">Overview of expectations, deliverables, and the assessment
+                                    schedule.</p>
                             </div>
                         </li>
 
                         <li class="task" data-tag="recommended">
                             <div class="task-row">
                                 <label class="task-checkwrap">
-                                    <input class="task-check" type="checkbox" aria-label="Mark Week 1 presentations complete">
+                                    <input class="task-check" type="checkbox"
+                                        aria-label="Mark Week 1 presentations complete">
                                     <span class="task-title">Week 1 presentations — First pair builds</span>
                                 </label>
                                 <div class="task-right">
-                                    <span class="tag tag--recommended"><span aria-hidden="true">🟡</span> Recommended</span>
+                                    <span class="tag tag--recommended"><span aria-hidden="true">🟡</span>
+                                        Recommended</span>
                                     <button class="task-toggle" type="button" aria-expanded="false">Details</button>
                                 </div>
                             </div>
                             <div class="task-detail" hidden>
-                                <p class="task-desc">Observe patterns in structure and storytelling for later PRD work.</p>
+                                <p class="task-desc">Observe patterns in structure and storytelling for later PRD work.
+                                </p>
                             </div>
                         </li>
 
@@ -168,7 +225,8 @@
                             <div class="task-detail" hidden>
                                 <p class="task-desc">Optional refresher to keep your workflow smooth this week.</p>
                                 <div class="task-actions">
-                                    <button class="btn btn-secondary" type="button"><span aria-hidden="true">📎</span> Submit Link</button>
+                                    <button class="btn btn-secondary" type="button"><span aria-hidden="true">📎</span>
+                                        Submit Link</button>
                                 </div>
                             </div>
                         </li>
@@ -180,7 +238,8 @@
                                 <span class="progress-label">Daily progress</span>
                                 <span class="progress-count" data-day-progress>0 / 0</span>
                             </div>
-                            <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-day-progressbar>
+                            <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+                                aria-valuenow="0" data-day-progressbar>
                                 <div class="progress-fill" data-day-progressfill></div>
                             </div>
                         </div>
@@ -190,7 +249,13 @@
                 <article class="day-card" data-day="2026-02-01" role="listitem" aria-label="Sunday">
                     <div class="day-head">
                         <div class="day-date">2.1 SUN</div>
-                        <div class="day-chip" aria-hidden="true">›</div>
+                        <div class="day-head-actions">
+                            <button class="expand-btn" type="button" data-expand-day aria-label="Expand day"
+                                aria-expanded="false">
+                                <span aria-hidden="true">⤢</span>
+                            </button>
+                            <div class="day-chip" aria-hidden="true">›</div>
+                        </div>
                     </div>
 
                     <div class="day-section-title">Activities</div>
@@ -198,8 +263,10 @@
                         <li class="task" data-tag="required" data-action="submit">
                             <div class="task-row">
                                 <label class="task-checkwrap">
-                                    <input class="task-check" type="checkbox" aria-label="Mark Week 2 assessment technical complete">
-                                    <span class="task-title">Week 2 assessment <span class="task-muted">[Technical]: Propose and implement product improvements</span></span>
+                                    <input class="task-check" type="checkbox"
+                                        aria-label="Mark Week 2 assessment technical complete">
+                                    <span class="task-title">Week 2 assessment <span class="task-muted">[Technical]:
+                                            Propose and implement product improvements</span></span>
                                 </label>
                                 <div class="task-right">
                                     <span class="tag tag--required"><span aria-hidden="true">🔴</span> Required</span>
@@ -209,7 +276,8 @@
                             <div class="task-detail" hidden>
                                 <p class="task-desc">Submit your technical proposal and any implementation notes.</p>
                                 <div class="task-actions">
-                                    <button class="btn btn-primary" type="button"><span aria-hidden="true">⬆️</span> Submit Assessment</button>
+                                    <button class="btn btn-primary" type="button"><span aria-hidden="true">⬆️</span>
+                                        Submit Assessment</button>
                                 </div>
                             </div>
                         </li>
@@ -217,8 +285,10 @@
                         <li class="task" data-tag="required">
                             <div class="task-row">
                                 <label class="task-checkwrap">
-                                    <input class="task-check" type="checkbox" aria-label="Mark Week 2 assessment business complete">
-                                    <span class="task-title">Week 2 assessment <span class="task-muted">[Business]: Justify highest-value improvements</span></span>
+                                    <input class="task-check" type="checkbox"
+                                        aria-label="Mark Week 2 assessment business complete">
+                                    <span class="task-title">Week 2 assessment <span class="task-muted">[Business]:
+                                            Justify highest-value improvements</span></span>
                                 </label>
                                 <div class="task-right">
                                     <span class="tag tag--required"><span aria-hidden="true">🔴</span> Required</span>
@@ -233,18 +303,22 @@
                         <li class="task" data-tag="recommended" data-action="submit">
                             <div class="task-row">
                                 <label class="task-checkwrap">
-                                    <input class="task-check" type="checkbox" aria-label="Mark video explanation complete">
-                                    <span class="task-title">Week 2 assessment <span class="task-muted">[Professional]: Video explanation for CEO</span></span>
+                                    <input class="task-check" type="checkbox"
+                                        aria-label="Mark video explanation complete">
+                                    <span class="task-title">Week 2 assessment <span class="task-muted">[Professional]:
+                                            Video explanation for CEO</span></span>
                                 </label>
                                 <div class="task-right">
-                                    <span class="tag tag--recommended"><span aria-hidden="true">🟡</span> Recommended</span>
+                                    <span class="tag tag--recommended"><span aria-hidden="true">🟡</span>
+                                        Recommended</span>
                                     <button class="task-toggle" type="button" aria-expanded="false">Details</button>
                                 </div>
                             </div>
                             <div class="task-detail" hidden>
                                 <p class="task-desc">Record a short, clear walkthrough of your recommendations.</p>
                                 <div class="task-actions">
-                                    <button class="btn btn-secondary" type="button"><span aria-hidden="true">🎥</span> Upload Video</button>
+                                    <button class="btn btn-secondary" type="button"><span aria-hidden="true">🎥</span>
+                                        Upload Video</button>
                                 </div>
                             </div>
                         </li>
@@ -266,16 +340,19 @@
                         <li class="task" data-tag="recommended">
                             <div class="task-row">
                                 <label class="task-checkwrap">
-                                    <input class="task-check" type="checkbox" aria-label="Mark UI/UX patterns learning complete">
+                                    <input class="task-check" type="checkbox"
+                                        aria-label="Mark UI/UX patterns learning complete">
                                     <span class="task-title">UI/UX patterns — Individual learning</span>
                                 </label>
                                 <div class="task-right">
-                                    <span class="tag tag--recommended"><span aria-hidden="true">🟡</span> Recommended</span>
+                                    <span class="tag tag--recommended"><span aria-hidden="true">🟡</span>
+                                        Recommended</span>
                                     <button class="task-toggle" type="button" aria-expanded="false">Details</button>
                                 </div>
                             </div>
                             <div class="task-detail" hidden>
-                                <p class="task-desc">Focus on patterns that reduce scanning effort and increase clarity.</p>
+                                <p class="task-desc">Focus on patterns that reduce scanning effort and increase clarity.
+                                </p>
                             </div>
                         </li>
                     </ul>
@@ -286,17 +363,25 @@
                                 <span class="progress-label">Daily progress</span>
                                 <span class="progress-count" data-day-progress>0 / 0</span>
                             </div>
-                            <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-day-progressbar>
+                            <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+                                aria-valuenow="0" data-day-progressbar>
                                 <div class="progress-fill" data-day-progressfill></div>
                             </div>
                         </div>
                     </div>
                 </article>
 
-                <article class="day-card day-card--today" data-day="2026-02-02" role="listitem" aria-label="Monday" data-selected="true">
+                <article class="day-card day-card--today" data-day="2026-02-02" role="listitem" aria-label="Monday"
+                    data-selected="true">
                     <div class="day-head">
                         <div class="day-date"><span class="today-label">TODAY</span> 2.2 MON</div>
-                        <div class="day-chip" aria-hidden="true">›</div>
+                        <div class="day-head-actions">
+                            <button class="expand-btn" type="button" data-expand-day aria-label="Expand day"
+                                aria-expanded="false">
+                                <span aria-hidden="true">⤢</span>
+                            </button>
+                            <div class="day-chip" aria-hidden="true">›</div>
+                        </div>
                     </div>
 
                     <div class="today-focus" aria-label="Today focus">
@@ -323,7 +408,8 @@
                                     <span class="task-title">Stand-up</span>
                                 </label>
                                 <div class="task-right">
-                                    <span class="tag tag--recommended"><span aria-hidden="true">🟡</span> Recommended</span>
+                                    <span class="tag tag--recommended"><span aria-hidden="true">🟡</span>
+                                        Recommended</span>
                                     <button class="task-toggle" type="button" aria-expanded="false">Details</button>
                                 </div>
                             </div>
@@ -346,7 +432,8 @@
                             <div class="task-detail" hidden>
                                 <p class="task-desc">Short required lesson to tighten narrative and hierarchy.</p>
                                 <div class="task-actions">
-                                    <button class="btn btn-primary" type="button"><span aria-hidden="true">▶️</span> Watch Required Video</button>
+                                    <button class="btn btn-primary" type="button"><span aria-hidden="true">▶️</span>
+                                        Watch Required Video</button>
                                 </div>
                             </div>
                         </li>
@@ -354,7 +441,8 @@
                         <li class="task" data-tag="required" data-focus="true" data-action="submit">
                             <div class="task-row">
                                 <label class="task-checkwrap">
-                                    <input class="task-check" type="checkbox" aria-label="Mark PRD Red Teaming complete">
+                                    <input class="task-check" type="checkbox"
+                                        aria-label="Mark PRD Red Teaming complete">
                                     <span class="task-title">PRD “Red Teaming”</span>
                                 </label>
                                 <div class="task-right">
@@ -363,9 +451,11 @@
                                 </div>
                             </div>
                             <div class="task-detail" hidden>
-                                <p class="task-desc">Identify risks, edge cases, and unclear requirements before writing the PRD.</p>
+                                <p class="task-desc">Identify risks, edge cases, and unclear requirements before writing
+                                    the PRD.</p>
                                 <div class="task-actions">
-                                    <button class="btn btn-primary" type="button"><span aria-hidden="true">📎</span> Upload PRD Draft</button>
+                                    <button class="btn btn-primary" type="button"><span aria-hidden="true">📎</span>
+                                        Upload PRD Draft</button>
                                 </div>
                             </div>
                         </li>
@@ -377,7 +467,8 @@
                                     <span class="task-title">Pair check-in</span>
                                 </label>
                                 <div class="task-right">
-                                    <span class="tag tag--recommended"><span aria-hidden="true">🟡</span> Recommended</span>
+                                    <span class="tag tag--recommended"><span aria-hidden="true">🟡</span>
+                                        Recommended</span>
                                     <button class="task-toggle" type="button" aria-expanded="false">Details</button>
                                 </div>
                             </div>
@@ -389,7 +480,8 @@
                         <li class="task" data-tag="required" data-focus="true" data-action="submit">
                             <div class="task-row">
                                 <label class="task-checkwrap">
-                                    <input class="task-check" type="checkbox" aria-label="Mark Business deep dive complete">
+                                    <input class="task-check" type="checkbox"
+                                        aria-label="Mark Business deep dive complete">
                                     <span class="task-title">Product analysis: Business deep dive</span>
                                 </label>
                                 <div class="task-right">
@@ -398,9 +490,11 @@
                                 </div>
                             </div>
                             <div class="task-detail" hidden>
-                                <p class="task-desc">Write 3–5 bullets: users, value prop, and business model assumptions.</p>
+                                <p class="task-desc">Write 3–5 bullets: users, value prop, and business model
+                                    assumptions.</p>
                                 <div class="task-actions">
-                                    <button class="btn btn-primary" type="button"><span aria-hidden="true">⬆️</span> Submit Analysis</button>
+                                    <button class="btn btn-primary" type="button"><span aria-hidden="true">⬆️</span>
+                                        Submit Analysis</button>
                                 </div>
                             </div>
                         </li>
@@ -417,7 +511,8 @@
                                 </div>
                             </div>
                             <div class="task-detail" hidden>
-                                <p class="task-desc">Quick reflection to improve your system for the rest of the week.</p>
+                                <p class="task-desc">Quick reflection to improve your system for the rest of the week.
+                                </p>
                             </div>
                         </li>
                     </ul>
@@ -428,7 +523,8 @@
                                 <span class="progress-label">Daily progress</span>
                                 <span class="progress-count" data-day-progress>0 / 0</span>
                             </div>
-                            <div class="progress progress--on-dark" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-day-progressbar>
+                            <div class="progress progress--on-dark" role="progressbar" aria-valuemin="0"
+                                aria-valuemax="100" aria-valuenow="0" data-day-progressbar>
                                 <div class="progress-fill" data-day-progressfill></div>
                             </div>
                         </div>
@@ -438,7 +534,13 @@
                 <article class="day-card" data-day="2026-02-03" role="listitem" aria-label="Tuesday">
                     <div class="day-head">
                         <div class="day-date">2.3 TUE</div>
-                        <div class="day-chip" aria-hidden="true">›</div>
+                        <div class="day-head-actions">
+                            <button class="expand-btn" type="button" data-expand-day aria-label="Expand day"
+                                aria-expanded="false">
+                                <span aria-hidden="true">⤢</span>
+                            </button>
+                            <div class="day-chip" aria-hidden="true">›</div>
+                        </div>
                     </div>
 
                     <div class="day-section-title">Activities</div>
@@ -446,11 +548,13 @@
                         <li class="task" data-tag="recommended">
                             <div class="task-row">
                                 <label class="task-checkwrap">
-                                    <input class="task-check" type="checkbox" aria-label="Mark Mini L2L product history complete">
+                                    <input class="task-check" type="checkbox"
+                                        aria-label="Mark Mini L2L product history complete">
                                     <span class="task-title">Mini L2L product history</span>
                                 </label>
                                 <div class="task-right">
-                                    <span class="tag tag--recommended"><span aria-hidden="true">🟡</span> Recommended</span>
+                                    <span class="tag tag--recommended"><span aria-hidden="true">🟡</span>
+                                        Recommended</span>
                                     <button class="task-toggle" type="button" aria-expanded="false">Details</button>
                                 </div>
                             </div>
@@ -462,7 +566,8 @@
                         <li class="task" data-tag="required">
                             <div class="task-row">
                                 <label class="task-checkwrap">
-                                    <input class="task-check" type="checkbox" aria-label="Mark history deep dive complete">
+                                    <input class="task-check" type="checkbox"
+                                        aria-label="Mark history deep dive complete">
                                     <span class="task-title">Product analysis: History deep dive</span>
                                 </label>
                                 <div class="task-right">
@@ -478,11 +583,13 @@
                         <li class="task" data-tag="recommended">
                             <div class="task-row">
                                 <label class="task-checkwrap">
-                                    <input class="task-check" type="checkbox" aria-label="Mark feedback refresher complete">
+                                    <input class="task-check" type="checkbox"
+                                        aria-label="Mark feedback refresher complete">
                                     <span class="task-title">Feedback refresher: How to give great feedback</span>
                                 </label>
                                 <div class="task-right">
-                                    <span class="tag tag--recommended"><span aria-hidden="true">🟡</span> Recommended</span>
+                                    <span class="tag tag--recommended"><span aria-hidden="true">🟡</span>
+                                        Recommended</span>
                                     <button class="task-toggle" type="button" aria-expanded="false">Details</button>
                                 </div>
                             </div>
@@ -494,7 +601,8 @@
                         <li class="task" data-tag="optional">
                             <div class="task-row">
                                 <label class="task-checkwrap">
-                                    <input class="task-check" type="checkbox" aria-label="Mark pair share-outs complete">
+                                    <input class="task-check" type="checkbox"
+                                        aria-label="Mark pair share-outs complete">
                                     <span class="task-title">Pair share-outs — product analysis progress</span>
                                 </label>
                                 <div class="task-right">
@@ -530,7 +638,8 @@
                                 <span class="progress-label">Daily progress</span>
                                 <span class="progress-count" data-day-progress>0 / 0</span>
                             </div>
-                            <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-day-progressbar>
+                            <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+                                aria-valuenow="0" data-day-progressbar>
                                 <div class="progress-fill" data-day-progressfill></div>
                             </div>
                         </div>
@@ -540,7 +649,13 @@
                 <article class="day-card" data-day="2026-02-04" role="listitem" aria-label="Wednesday">
                     <div class="day-head">
                         <div class="day-date">2.4 WED</div>
-                        <div class="day-chip" aria-hidden="true">›</div>
+                        <div class="day-head-actions">
+                            <button class="expand-btn" type="button" data-expand-day aria-label="Expand day"
+                                aria-expanded="false">
+                                <span aria-hidden="true">⤢</span>
+                            </button>
+                            <div class="day-chip" aria-hidden="true">›</div>
+                        </div>
                     </div>
 
                     <div class="day-section-title">Activities</div>
@@ -564,7 +679,8 @@
                         <li class="task" data-tag="required" data-action="submit">
                             <div class="task-row">
                                 <label class="task-checkwrap">
-                                    <input class="task-check" type="checkbox" aria-label="Mark Final PRD polish complete">
+                                    <input class="task-check" type="checkbox"
+                                        aria-label="Mark Final PRD polish complete">
                                     <span class="task-title">Final PRD polish</span>
                                 </label>
                                 <div class="task-right">
@@ -575,7 +691,8 @@
                             <div class="task-detail" hidden>
                                 <p class="task-desc">Tighten language, acceptance criteria, and success metrics.</p>
                                 <div class="task-actions">
-                                    <button class="btn btn-primary" type="button"><span aria-hidden="true">⬆️</span> Submit PRD</button>
+                                    <button class="btn btn-primary" type="button"><span aria-hidden="true">⬆️</span>
+                                        Submit PRD</button>
                                 </div>
                             </div>
                         </li>
@@ -583,23 +700,27 @@
                         <li class="task" data-tag="recommended">
                             <div class="task-row">
                                 <label class="task-checkwrap">
-                                    <input class="task-check" type="checkbox" aria-label="Mark Presentation prep complete">
+                                    <input class="task-check" type="checkbox"
+                                        aria-label="Mark Presentation prep complete">
                                     <span class="task-title">Presentation prep</span>
                                 </label>
                                 <div class="task-right">
-                                    <span class="tag tag--recommended"><span aria-hidden="true">🟡</span> Recommended</span>
+                                    <span class="tag tag--recommended"><span aria-hidden="true">🟡</span>
+                                        Recommended</span>
                                     <button class="task-toggle" type="button" aria-expanded="false">Details</button>
                                 </div>
                             </div>
                             <div class="task-detail" hidden>
-                                <p class="task-desc">Create a 3–5 minute narrative focused on priorities and tradeoffs.</p>
+                                <p class="task-desc">Create a 3–5 minute narrative focused on priorities and tradeoffs.
+                                </p>
                             </div>
                         </li>
 
                         <li class="task" data-tag="optional">
                             <div class="task-row">
                                 <label class="task-checkwrap">
-                                    <input class="task-check" type="checkbox" aria-label="Mark practice with another pair complete">
+                                    <input class="task-check" type="checkbox"
+                                        aria-label="Mark practice with another pair complete">
                                     <span class="task-title">Presentation practice with another pair</span>
                                 </label>
                                 <div class="task-right">
@@ -635,12 +756,16 @@
                                 <span class="progress-label">Daily progress</span>
                                 <span class="progress-count" data-day-progress>0 / 0</span>
                             </div>
-                            <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-day-progressbar>
+                            <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+                                aria-valuenow="0" data-day-progressbar>
                                 <div class="progress-fill" data-day-progressfill></div>
                             </div>
                         </div>
                     </div>
                 </article>
+                    </div>
+                </div>
+                <button class="scroll-btn" type="button" data-scroll-right aria-label="Scroll days right">›</button>
             </div>
         </section>
     </main>
@@ -648,6 +773,8 @@
     <div class="toast-stack" aria-live="polite" aria-atomic="true" data-toast-stack></div>
 
     <script>
+        const TEST_MODE = new URLSearchParams(window.location.search).has('test');
+
         const TAG_WEIGHT = {
             required: 3,
             recommended: 2,
@@ -661,8 +788,430 @@
         };
 
         const REMINDER_MINUTES = 60;
-        const LUNCH_STORAGE_KEY = 'pursuit:lunchTimers:v1';
-        const MISSED_STORAGE_KEY = 'pursuit:missedAssignments:v1';
+        const LUNCH_STORAGE_KEY = `pursuit:lunchTimers:v1${TEST_MODE ? ':test' : ''}`;
+        const MISSED_STORAGE_KEY = `pursuit:missedAssignments:v1${TEST_MODE ? ':test' : ''}`;
+        const TASKS_STORAGE_KEY = `pursuit:taskChecks:v1${TEST_MODE ? ':test' : ''}`;
+        const SELECTED_DAY_STORAGE_KEY = `pursuit:selectedDay:v1${TEST_MODE ? ':test' : ''}`;
+        const CURRICULUM_STORAGE_KEY = `pursuit:curriculum:v1${TEST_MODE ? ':test' : ''}`;
+        const THEME_STORAGE_KEY = `pursuit:theme:v1`;
+
+        const TEST_REMINDER_INTERVAL_MS = 10 * 1000;
+        const TEST_LUNCH_DEFAULT_MS = 20 * 1000;
+
+        let TASK_STATE = {};
+
+        function loadJson(key, fallback) {
+            try {
+                const raw = localStorage.getItem(key);
+                return raw ? JSON.parse(raw) : fallback;
+            } catch {
+                return fallback;
+            }
+        }
+
+        function saveJson(key, value) {
+            try {
+                localStorage.setItem(key, JSON.stringify(value));
+            } catch {
+                // ignore
+            }
+        }
+
+        function systemPrefersDark() {
+            return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        }
+
+        function getStoredTheme() {
+            try {
+                const t = localStorage.getItem(THEME_STORAGE_KEY);
+                return t === 'dark' || t === 'light' ? t : null;
+            } catch {
+                return null;
+            }
+        }
+
+        function setStoredTheme(theme) {
+            try {
+                localStorage.setItem(THEME_STORAGE_KEY, theme);
+            } catch {
+                // ignore
+            }
+        }
+
+        function applyTheme(theme) {
+            const root = document.documentElement;
+            root.dataset.theme = theme;
+
+            const btn = document.querySelector('[data-theme-toggle]');
+            const icon = document.querySelector('[data-theme-icon]');
+            const text = document.querySelector('[data-theme-text]');
+            const isDark = theme === 'dark';
+
+            if (btn) btn.setAttribute('aria-pressed', String(isDark));
+            if (icon) icon.textContent = isDark ? '☀️' : '🌙';
+            if (text) text.textContent = isDark ? 'Day' : 'Night';
+        }
+
+        function initThemeToggle() {
+            const btn = document.querySelector('[data-theme-toggle]');
+            const initial = getStoredTheme() || (systemPrefersDark() ? 'dark' : 'light');
+            applyTheme(initial);
+
+            if (!btn) return;
+            btn.addEventListener('click', () => {
+                const current = document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
+                const next = current === 'dark' ? 'light' : 'dark';
+                setStoredTheme(next);
+                applyTheme(next);
+            });
+
+            if (window.matchMedia) {
+                const media = window.matchMedia('(prefers-color-scheme: dark)');
+                const onChange = () => {
+                    // Only follow system changes if user hasn't explicitly chosen.
+                    if (getStoredTheme()) return;
+                    applyTheme(systemPrefersDark() ? 'dark' : 'light');
+                };
+                if (typeof media.addEventListener === 'function') media.addEventListener('change', onChange);
+                else if (typeof media.addListener === 'function') media.addListener(onChange);
+            }
+        }
+
+        function taskStorageKeyFor(taskEl) {
+            if (!taskEl) return null;
+            const dayCard = taskEl.closest('.day-card');
+            const day = dayCard?.dataset.day || 'unknown-day';
+            const tasks = dayCard ? getTasks(dayCard) : [];
+            const idx = tasks.indexOf(taskEl);
+            const title = taskEl.querySelector('.task-title')?.textContent?.trim() || 'task';
+            const safeTitle = encodeURIComponent(title.slice(0, 80));
+            return `${day}:task:${idx}:${safeTitle}`;
+        }
+
+        function loadTaskState() {
+            const state = loadJson(TASKS_STORAGE_KEY, {});
+            return state && typeof state === 'object' ? state : {};
+        }
+
+        function saveTaskState(state) {
+            saveJson(TASKS_STORAGE_KEY, state);
+        }
+
+        function applyTaskState(state) {
+            const tasks = getTasks(document);
+            for (const task of tasks) {
+                const check = task.querySelector('.task-check');
+                if (!check) continue;
+                const key = taskStorageKeyFor(task);
+                if (!key) continue;
+                if (typeof state[key] === 'boolean') check.checked = state[key];
+            }
+        }
+
+        function clearSelectedCards() {
+            const cards = Array.from(document.querySelectorAll('.day-card'));
+            for (const card of cards) {
+                card.classList.remove('day-card--selected');
+                card.removeAttribute('aria-selected');
+            }
+        }
+
+        function selectCard(card) {
+            if (!card) return;
+            clearSelectedCards();
+            card.classList.add('day-card--selected');
+            card.setAttribute('aria-selected', 'true');
+            const day = card.dataset.day;
+            if (day) {
+                try {
+                    localStorage.setItem(SELECTED_DAY_STORAGE_KEY, day);
+                } catch {
+                    // ignore
+                }
+            }
+        }
+
+        function restoreSelectedCard() {
+            let storedDay = null;
+            try {
+                storedDay = localStorage.getItem(SELECTED_DAY_STORAGE_KEY);
+            } catch {
+                storedDay = null;
+            }
+
+            const byStored = storedDay
+                ? document.querySelector(`.day-card[data-day="${CSS.escape(storedDay)}"]`)
+                : null;
+            const byDataSelected = document.querySelector('.day-card[data-selected="true"]');
+            const today = document.querySelector('.day-card--today');
+
+            selectCard(byStored || byDataSelected || today);
+        }
+
+        function serializeCard(card) {
+            const dateText = card.querySelector('.day-date')?.textContent?.trim() || '';
+            const dateShort = dateText.replace(/^TODAY\s+/i, '').trim();
+
+            const goal = document.querySelector('.hero-text')?.textContent?.trim() || '';
+
+            const items = [];
+            const taskEls = Array.from(card.querySelectorAll('.task-list .task'));
+            for (const task of taskEls) {
+                if (task.classList.contains('task--separator')) {
+                    const label = task.querySelector('.lunch-label')?.textContent?.trim() || 'Break';
+                    items.push({ type: 'separator', label });
+                    continue;
+                }
+
+                const title = task.querySelector('.task-title')?.textContent?.trim() || 'Task';
+                const tag = task.dataset.tag || 'optional';
+                const emoji = tag === 'required' ? '🔴' : tag === 'recommended' ? '🟡' : '⚪';
+                items.push({ type: 'task', title, tag, emoji });
+            }
+
+            return {
+                dateShort,
+                dateLong: dateText,
+                goal,
+                items,
+            };
+        }
+
+        function buildAssignmentIndexFromDom() {
+            const cards = Array.from(document.querySelectorAll('.day-card[data-day]'));
+            const dayOrder = new Map(cards.map((c, i) => [c.dataset.day, i]));
+
+            const index = [];
+            for (const card of cards) {
+                const day = card.dataset.day;
+                if (!day) continue;
+
+                const dateLong = card.querySelector('.day-date')?.textContent?.trim() || '';
+                const dateShort = dateLong.replace(/^TODAY\s+/i, '').trim();
+                const label = card.getAttribute('aria-label') || '';
+
+                const taskEls = Array.from(card.querySelectorAll('.task-list .task'));
+                let taskIdx = 0;
+                for (const taskEl of taskEls) {
+                    if (taskEl.classList.contains('task--separator')) continue;
+                    const title = taskEl.querySelector('.task-title')?.textContent?.trim() || '';
+                    if (!title) continue;
+                    const tag = taskEl.dataset.tag || 'optional';
+
+                    index.push({
+                        day,
+                        dateShort,
+                        dateLong,
+                        label,
+                        title,
+                        tag,
+                        emoji: TAG_EMOJI[tag] || '⚪',
+                        weight: TAG_WEIGHT[tag] || 0,
+                        dayIdx: dayOrder.get(day) ?? 9999,
+                        taskIdx: taskIdx++,
+                    });
+                }
+            }
+
+            return index;
+        }
+
+        function initAssignmentSearch() {
+            const wrap = document.querySelector('[data-assignment-search]');
+            const input = document.querySelector('[data-search-input]');
+            const resultsEl = document.querySelector('[data-search-results]');
+            if (!wrap || !input || !resultsEl) return;
+
+            let assignmentIndex = buildAssignmentIndexFromDom();
+            let activeIndex = -1;
+            let lastQuery = '';
+
+            const close = () => {
+                resultsEl.hidden = true;
+                resultsEl.innerHTML = '';
+                activeIndex = -1;
+            };
+
+            const open = () => {
+                if (resultsEl.childElementCount > 0) resultsEl.hidden = false;
+            };
+
+            const setActive = (idx) => {
+                const options = Array.from(resultsEl.querySelectorAll('[data-search-option]'));
+                if (!options.length) {
+                    activeIndex = -1;
+                    return;
+                }
+                activeIndex = Math.max(0, Math.min(options.length - 1, idx));
+                for (const [i, el] of options.entries()) {
+                    if (i === activeIndex) el.setAttribute('aria-selected', 'true');
+                    else el.removeAttribute('aria-selected');
+                }
+                options[activeIndex].scrollIntoView({ block: 'nearest' });
+            };
+
+            const selectResult = (item) => {
+                if (!item?.day) return;
+                const card = document.querySelector(`.day-card[data-day="${CSS.escape(item.day)}"]`);
+                if (card) navigateToDay(card);
+                close();
+            };
+
+            const renderResults = (items, query) => {
+                resultsEl.innerHTML = '';
+
+                if (!query) {
+                    close();
+                    return;
+                }
+
+                if (!items.length) {
+                    const empty = document.createElement('div');
+                    empty.className = 'search-empty';
+                    empty.textContent = 'No matches.';
+                    resultsEl.appendChild(empty);
+                    resultsEl.hidden = false;
+                    return;
+                }
+
+                for (const item of items) {
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = 'search-option';
+                    btn.setAttribute('role', 'option');
+                    btn.setAttribute('data-search-option', '');
+                    btn.innerHTML = `
+                        <div class="search-option-main">
+                            <div class="search-option-title">${item.title}</div>
+                            <div class="search-option-meta">${item.dateShort || item.label || item.day}</div>
+                        </div>
+                        <div class="search-option-right">
+                            <span class="tag tag--${item.tag}"><span aria-hidden="true">${item.emoji}</span> ${item.tag}</span>
+                        </div>
+                    `;
+                    btn.addEventListener('click', () => selectResult(item));
+                    resultsEl.appendChild(btn);
+                }
+
+                resultsEl.hidden = false;
+                setActive(0);
+            };
+
+            const search = (query) => {
+                const q = String(query || '').trim().toLowerCase();
+                lastQuery = q;
+                if (!q) {
+                    close();
+                    return;
+                }
+
+                // Keep index fresh if curriculum changes.
+                assignmentIndex = buildAssignmentIndexFromDom();
+
+                const filtered = assignmentIndex
+                    .filter((it) => it.title.toLowerCase().includes(q))
+                    .sort((a, b) => {
+                        if (b.weight !== a.weight) return b.weight - a.weight;
+                        if (a.dayIdx !== b.dayIdx) return a.dayIdx - b.dayIdx;
+                        return a.taskIdx - b.taskIdx;
+                    })
+                    .slice(0, 14);
+
+                renderResults(filtered, q);
+            };
+
+            input.addEventListener('input', () => search(input.value));
+            input.addEventListener('focus', () => {
+                if (resultsEl.childElementCount > 0) open();
+            });
+
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    close();
+                    input.blur();
+                    return;
+                }
+
+                if (resultsEl.hidden) return;
+
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    setActive(activeIndex + 1);
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    setActive(activeIndex - 1);
+                } else if (e.key === 'Enter') {
+                    const options = Array.from(resultsEl.querySelectorAll('[data-search-option]'));
+                    const el = options[activeIndex];
+                    if (!el) return;
+                    e.preventDefault();
+                    // Re-run search to ensure we have latest ordering.
+                    const q = lastQuery;
+                    const list = assignmentIndex
+                        .filter((it) => it.title.toLowerCase().includes(q))
+                        .sort((a, b) => {
+                            if (b.weight !== a.weight) return b.weight - a.weight;
+                            if (a.dayIdx !== b.dayIdx) return a.dayIdx - b.dayIdx;
+                            return a.taskIdx - b.taskIdx;
+                        })
+                        .slice(0, 14);
+                    const item = list[activeIndex];
+                    if (item) selectResult(item);
+                }
+            });
+
+            document.addEventListener('click', (e) => {
+                if (e.target.closest('[data-assignment-search]')) return;
+                close();
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+                    e.preventDefault();
+                    input.focus();
+                    input.select();
+                }
+            });
+        }
+
+        function saveCurriculumSnapshot() {
+            const grid = document.querySelector('.dashboard-grid');
+            if (!grid) return;
+            const cards = Array.from(grid.querySelectorAll('.day-card'));
+            const map = {};
+            for (const card of cards) {
+                const day = card.dataset.day;
+                if (!day) continue;
+                map[day] = serializeCard(card);
+            }
+            try {
+                localStorage.setItem(CURRICULUM_STORAGE_KEY, JSON.stringify(map));
+            } catch {
+                // ignore
+            }
+        }
+
+        function navigateToDay(card) {
+            if (!card) return;
+            const day = card.dataset.day;
+            if (!day) return;
+            selectCard(card);
+            saveCurriculumSnapshot();
+            window.location.href = `day.html?day=${encodeURIComponent(day)}${TEST_MODE ? '&test=1' : ''}`;
+        }
+
+        function bindDayNavigation() {
+            const grid = document.querySelector('.dashboard-grid');
+            if (!grid) return;
+
+            grid.addEventListener('click', (e) => {
+                // Don’t navigate if user is interacting with controls.
+                if (e.target.closest('button, input, a, label')) return;
+                const card = e.target.closest('.day-card');
+                if (!card) return;
+                navigateToDay(card);
+            });
+        }
 
         function pad2(n) {
             return String(n).padStart(2, '0');
@@ -701,6 +1250,26 @@
             toast.querySelector('.toast-close')?.addEventListener('click', close);
             stack.appendChild(toast);
             if (timeoutMs > 0) window.setTimeout(close, timeoutMs);
+        }
+
+        function mountTestModePill() {
+            if (!TEST_MODE) return;
+            const host = document.querySelector('.topbar-right');
+            if (!host) return;
+
+            const pill = document.createElement('div');
+            pill.className = 'test-pill';
+            pill.setAttribute('role', 'status');
+            pill.textContent = '🧪 Test mode ON';
+            pill.title = 'Fast reminders/timers enabled. Remove ?test=1 to disable.';
+            host.prepend(pill);
+
+            showToast({
+                title: '🧪 Test mode ON',
+                message: 'Fast reminders and lunch timers enabled for testing.',
+                tone: 'info',
+                timeoutMs: 5000,
+            });
         }
 
         function playBeep() {
@@ -882,7 +1451,7 @@
             const stateRaw = localStorage.getItem(MISSED_STORAGE_KEY);
             const state = stateRaw ? JSON.parse(stateRaw) : {};
             const lastReminderAt = typeof state.lastReminderAt === 'number' ? state.lastReminderAt : 0;
-            const minGapMs = REMINDER_MINUTES * 60 * 1000;
+            const minGapMs = TEST_MODE ? TEST_REMINDER_INTERVAL_MS : REMINDER_MINUTES * 60 * 1000;
 
             const shouldRemindNow = now - lastReminderAt > minGapMs;
             if (shouldRemindNow) {
@@ -948,7 +1517,9 @@
                 const stopBtn = timerEl.querySelector('[data-lunch-stop]');
                 const resetBtn = timerEl.querySelector('[data-lunch-reset]');
                 const defaultMinutes = Number(timerEl.dataset.defaultMinutes || '30');
-                const defaultMs = (Number.isFinite(defaultMinutes) ? defaultMinutes : 30) * 60 * 1000;
+                const defaultMs = TEST_MODE
+                    ? TEST_LUNCH_DEFAULT_MS
+                    : (Number.isFinite(defaultMinutes) ? defaultMinutes : 30) * 60 * 1000;
 
                 const entry = state[key] || { endAt: null, remainingMs: defaultMs, isRunning: false };
                 const remainingMs = entry.isRunning && entry.endAt ? entry.endAt - Date.now() : entry.remainingMs;
@@ -991,7 +1562,9 @@
             function start(timerEl) {
                 const key = lunchKeyFor(timerEl);
                 const defaultMinutes = Number(timerEl.dataset.defaultMinutes || '30');
-                const defaultMs = (Number.isFinite(defaultMinutes) ? defaultMinutes : 30) * 60 * 1000;
+                const defaultMs = TEST_MODE
+                    ? TEST_LUNCH_DEFAULT_MS
+                    : (Number.isFinite(defaultMinutes) ? defaultMinutes : 30) * 60 * 1000;
                 const entry = state[key] || { endAt: null, remainingMs: defaultMs, isRunning: false };
                 const remainingMs = entry.remainingMs ?? defaultMs;
                 entry.endAt = Date.now() + remainingMs;
@@ -1020,7 +1593,9 @@
             function reset(timerEl) {
                 const key = lunchKeyFor(timerEl);
                 const defaultMinutes = Number(timerEl.dataset.defaultMinutes || '30');
-                const defaultMs = (Number.isFinite(defaultMinutes) ? defaultMinutes : 30) * 60 * 1000;
+                const defaultMs = TEST_MODE
+                    ? TEST_LUNCH_DEFAULT_MS
+                    : (Number.isFinite(defaultMinutes) ? defaultMinutes : 30) * 60 * 1000;
                 state[key] = { endAt: null, remainingMs: defaultMs, isRunning: false };
                 saveLunchState(state);
                 stopTick(key);
@@ -1129,10 +1704,101 @@
             });
         }
 
+        function bindDashboardScrollButtons() {
+            const viewport = document.querySelector('[data-dashboard-viewport]');
+            const leftBtn = document.querySelector('[data-scroll-left]');
+            const rightBtn = document.querySelector('[data-scroll-right]');
+            if (!viewport || !leftBtn || !rightBtn) return;
+
+            const updateDisabled = () => {
+                const max = viewport.scrollWidth - viewport.clientWidth;
+                const hasOverflow = max > 2;
+                leftBtn.style.display = hasOverflow ? '' : 'none';
+                rightBtn.style.display = hasOverflow ? '' : 'none';
+                leftBtn.disabled = viewport.scrollLeft <= 2;
+                rightBtn.disabled = viewport.scrollLeft >= max - 2;
+            };
+
+            const scrollByAmount = (dir) => {
+                const firstCard = viewport.querySelector('.day-card');
+                const cardWidth = firstCard ? firstCard.getBoundingClientRect().width : 320;
+                const gap = 12;
+                const amount = Math.max(240, Math.round(cardWidth + gap));
+                viewport.scrollBy({ left: dir * amount, behavior: 'smooth' });
+            };
+
+            leftBtn.addEventListener('click', () => scrollByAmount(-1));
+            rightBtn.addEventListener('click', () => scrollByAmount(1));
+            viewport.addEventListener('scroll', updateDisabled, { passive: true });
+            window.addEventListener('resize', updateDisabled);
+            updateDisabled();
+        }
+
+        function bindDayExpansion() {
+            const grid = document.querySelector('.dashboard-grid');
+            if (!grid) return;
+            const scrollWrap = grid.closest('.dashboard-scroll');
+
+            function collapseAll() {
+                grid.classList.remove('dashboard-grid--expanded');
+                if (scrollWrap) scrollWrap.classList.remove('dashboard-scroll--expanded');
+                const cards = Array.from(grid.querySelectorAll('.day-card'));
+                for (const card of cards) {
+                    card.classList.remove('day-card--expanded', 'day-card--minimized');
+                    const toggle = card.querySelector('[data-expand-day]');
+                    if (toggle) toggle.setAttribute('aria-expanded', 'false');
+                }
+            }
+
+            grid.addEventListener('click', (e) => {
+                const btn = e.target.closest('[data-expand-day]');
+                if (!btn) return;
+                const card = btn.closest('.day-card');
+                if (!card) return;
+
+                const isExpanded = card.classList.contains('day-card--expanded');
+                if (grid.classList.contains('dashboard-grid--expanded') && isExpanded) {
+                    collapseAll();
+                    return;
+                }
+
+                grid.classList.add('dashboard-grid--expanded');
+                if (scrollWrap) scrollWrap.classList.add('dashboard-scroll--expanded');
+                const cards = Array.from(grid.querySelectorAll('.day-card'));
+                for (const c of cards) {
+                    const toggle = c.querySelector('[data-expand-day]');
+                    if (c === card) {
+                        c.classList.add('day-card--expanded');
+                        c.classList.remove('day-card--minimized');
+                        if (toggle) toggle.setAttribute('aria-expanded', 'true');
+                    } else {
+                        c.classList.add('day-card--minimized');
+                        c.classList.remove('day-card--expanded');
+                        if (toggle) toggle.setAttribute('aria-expanded', 'false');
+                    }
+                }
+            });
+
+            // Optional: ESC collapses
+            document.addEventListener('keydown', (e) => {
+                if (e.key !== 'Escape') return;
+                if (!grid.classList.contains('dashboard-grid--expanded')) return;
+                collapseAll();
+            });
+        }
+
         function bindProgressUpdates() {
             document.addEventListener('change', (e) => {
                 const check = e.target.closest('.task-check');
                 if (!check) return;
+
+                const task = check.closest('.task');
+                const storageKey = taskStorageKeyFor(task);
+                if (storageKey) {
+                    TASK_STATE[storageKey] = Boolean(check.checked);
+                    saveTaskState(TASK_STATE);
+                }
+
                 const dayCard = check.closest('.day-card');
                 if (dayCard) updateDayProgress(dayCard);
                 updateWeekProgress();
@@ -1146,9 +1812,24 @@
         }
 
         function init() {
+            initThemeToggle();
+            mountTestModePill();
+            initAssignmentSearch();
             bindTaskToggles();
             bindProgressUpdates();
             bindNextBestAction();
+            bindDayExpansion();
+            bindDayNavigation();
+            bindDashboardScrollButtons();
+
+            TASK_STATE = loadTaskState();
+            applyTaskState(TASK_STATE);
+
+            restoreSelectedCard();
+
+            // Seed day view data early so deep links work after first load.
+            saveCurriculumSnapshot();
+
             const dayCards = Array.from(document.querySelectorAll('.day-card'));
             for (const card of dayCards) updateDayProgress(card);
             updateWeekProgress();
